@@ -38,4 +38,16 @@ public class PetDaoInMemory implements PetDao {
     public void addPet(Pet pet) {
         petStorage.add(pet);
     }
+
+    @Override
+    public Pet deletePet(int id) {
+        for (Pet pet: petStorage) {
+            if (pet.getId() == id) {
+                petStorage.remove(pet);
+                System.out.println("Succesfully removed: " + pet);
+                return pet;
+            }
+        }
+        return null;
+    }
 }

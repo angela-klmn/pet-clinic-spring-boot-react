@@ -9,4 +9,6 @@ public interface PetDao {
     Pet getPetByName();
     Pet getPetById();
     void addPet(Pet pet);
+
+    Pet deletePet(int id);
 }
