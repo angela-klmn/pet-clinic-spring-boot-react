@@ -10,9 +10,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-//
-// @Primary
-@Component
+
 public class PetDaoInMemory implements PetDao {
     Set<Pet> petStorage = new HashSet<>();
 

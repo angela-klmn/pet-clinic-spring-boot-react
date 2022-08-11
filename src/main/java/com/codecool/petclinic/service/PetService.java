@@ -12,12 +12,7 @@ import java.util.Set;
 @Service
 public class PetService {
     private PetDao petDao;
-    //private DbConfiguration dbConfiguration;
 
-//    @Autowired
-//    public PetService(DbConfiguration dbConfiguration) {
-//        this.petDao = dbConfiguration.getPetDao();
-//    }
 
     @Autowired
     public PetService(PetDao petDao) {
@@ -27,7 +22,6 @@ public class PetService {
     public Set<Pet> getAllPets() {
         Set<Pet> pets = petDao.getAllPets();
         return pets;
-
     }
 
     public void addPet(Pet petToAdd) {
