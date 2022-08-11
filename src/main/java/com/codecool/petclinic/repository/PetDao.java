@@ -7,6 +7,7 @@ import java.util.Set;
 public interface PetDao {
     Set<Pet> getAllPets();
     Pet getPetByName();
-    Pet getPetById();
+    Pet getPetById(int id);
     void addPet(Pet pet);
+    void updatePet(Pet pet, int id);
 }

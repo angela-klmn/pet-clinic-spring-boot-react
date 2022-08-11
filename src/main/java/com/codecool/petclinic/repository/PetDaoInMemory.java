@@ -30,12 +30,26 @@ public class PetDaoInMemory implements PetDao {
     }
 
     @Override
-    public Pet getPetById() {
-        return null;
+    public Pet getPetById(int id) {
+        for(Pet pet : petStorage) {
+            if(pet.getId() == id) {
+                return pet;
+            }
+        } return null;
     }
 
     @Override
     public void addPet(Pet pet) {
         petStorage.add(pet);
     }
+
+    @Override
+    public void updatePet(Pet updatedPet, int id) {
+        Pet pet = getPetById(id);
+        pet.setName(updatedPet.getName());
+        pet.setBirthDate(updatedPet.getBirthDate());
+        pet.setType(updatedPet.getType());
+        pet.setOwner(updatedPet.getOwner());
+        }
+
 }

@@ -27,4 +27,8 @@ public class PetService {
     public void addPet(Pet petToAdd) {
         petDao.addPet(petToAdd);
     }
+
+    public void updatePet(Pet petToUpdate, int id) {
+        petDao.updatePet(petToUpdate, id);
+    }
 }

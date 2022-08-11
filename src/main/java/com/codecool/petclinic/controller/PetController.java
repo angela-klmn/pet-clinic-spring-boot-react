@@ -42,4 +42,9 @@ public class PetController {
         return petToAdd.toString();
 
     }
+
+    @PutMapping(value = "/pet/update/{id}")
+    public void updatePet(@RequestBody Pet petToUpdate, @PathVariable int id) {
+        petService.updatePet(petToUpdate, id);
+    }
 }
