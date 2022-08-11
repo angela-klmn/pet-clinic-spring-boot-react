@@ -24,15 +24,24 @@ public class PetController {
 
 
     @GetMapping("/pets")
-    public String listAllPets() {
+    public Set<Pet> listAllPets() {
     Set<Pet> pets =  petService.getAllPets();
-        return pets.toString();
+        return pets;
     }
 
     @GetMapping("/pet/{id}")
-    public String getPet(@PathVariable Long id) {
+    public String getPet(@PathVariable int id) {
 
         return "This is the profile page for dog, with id: " + id;
+    }
+
+    @DeleteMapping("/pet/{id}")
+    public String deletePet(@PathVariable int id) {
+        Pet deletedPet = petService.deletePet(id);
+        if (deletedPet == null) {
+            return "Could NOT delete pet";
+        }
+        return "Successfully deleted: " + deletedPet;
     }
 
     @PostMapping(value = "/pets/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

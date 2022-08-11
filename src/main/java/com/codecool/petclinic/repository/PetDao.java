@@ -10,4 +10,6 @@ public interface PetDao {
     Pet getPetById(int id);
     void addPet(Pet pet);
     void updatePet(Pet pet, int id);
+
+    Pet deletePet(int id);
 }
