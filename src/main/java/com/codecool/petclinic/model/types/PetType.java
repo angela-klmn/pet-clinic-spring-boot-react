@@ -1,4 +1,4 @@
-package com.codecool.petclinic.model;
+package com.codecool.petclinic.model.types;
 
 public enum PetType {
     DOG,

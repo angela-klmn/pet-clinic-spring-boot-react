@@ -29,13 +29,13 @@ public class PetController {
         return pets;
     }
 
-    @GetMapping("/pet/{id}")
-    public String getPet(@PathVariable int id) {
-
-        return "This is the profile page for dog, with id: " + id;
+    @GetMapping("/pets/{id}")
+    public Pet getPet(@PathVariable int id) {
+        Pet pet = petService.getPetById(id);
+        return pet;
     }
 
-    @DeleteMapping("/pet/{id}")
+    @DeleteMapping("/pets/{id}")
     public String deletePet(@PathVariable int id) {
         Pet deletedPet = petService.deletePet(id);
         if (deletedPet == null) {
@@ -44,15 +44,14 @@ public class PetController {
         return "Successfully deleted: " + deletedPet;
     }
 
-    @PostMapping(value = "/pets/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String addPet(@RequestBody Pet petToAdd) {
-
-        petService.addPet(petToAdd);
+    @PostMapping(value = "/pets/add/{ownerId}")
+    public String addPet(@RequestBody Pet petToAdd, @PathVariable int ownerId) {
+        petService.addPet(petToAdd, ownerId);
         return petToAdd.toString();
 
     }
 
-    @PutMapping(value = "/pet/update/{id}")
+    @PutMapping(value = "/pets/update/{id}")
     public void updatePet(@RequestBody Pet petToUpdate, @PathVariable int id) {
         petService.updatePet(petToUpdate, id);
     }

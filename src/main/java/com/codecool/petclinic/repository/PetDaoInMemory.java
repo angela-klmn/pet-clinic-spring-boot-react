@@ -2,9 +2,7 @@ package com.codecool.petclinic.repository;
 
 import com.codecool.petclinic.model.Owner;
 import com.codecool.petclinic.model.Pet;
-import com.codecool.petclinic.model.PetType;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
+import com.codecool.petclinic.model.types.PetType;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -15,8 +13,8 @@ public class PetDaoInMemory implements PetDao {
     Set<Pet> petStorage = new HashSet<>();
 
     public PetDaoInMemory() {
-        petStorage.add(new Pet("Buksi", LocalDate.of(2020, 1, 8), PetType.DOG, new Owner(), null));
-        petStorage.add(new Pet("Bunny", LocalDate.of(2022, 1, 9), PetType.BUNNY, new Owner(), null));
+        petStorage.add(new Pet("Doggie", LocalDate.of(2020, 1, 8), PetType.DOG, 0, null));
+        petStorage.add(new Pet("Bunny", LocalDate.of(2022, 1, 9), PetType.BUNNY, 0, null));
     }
 
     @Override
@@ -39,17 +37,27 @@ public class PetDaoInMemory implements PetDao {
     }
 
     @Override
-    public void addPet(Pet pet) {
+    public int addPet(Pet pet) {
         petStorage.add(pet);
+        System.out.println("This pet was added: " + pet);
+        return pet.getId();
     }
 
     @Override
-    public void updatePet(Pet updatedPet, int id) {
+    public void updatePet(Pet transferPet, int id) {
         Pet pet = getPetById(id);
-        pet.setName(updatedPet.getName());
-        pet.setBirthDate(updatedPet.getBirthDate());
-        pet.setType(updatedPet.getType());
-        pet.setOwner(updatedPet.getOwner());
+        if (transferPet.getName() != null) {
+            pet.setName(transferPet.getName());
+        }
+        if (transferPet.getBirthDate() != null) {
+            pet.setBirthDate(transferPet.getBirthDate());
+        }
+        if (transferPet.getType() != null) {
+            pet.setType(transferPet.getType());
+        }
+        if (transferPet.getOwnerId() != 0) {
+            pet.setOwnerId(transferPet.getOwnerId());
+        }
         }
 
 

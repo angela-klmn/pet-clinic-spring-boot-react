@@ -1,10 +1,9 @@
 package com.codecool.petclinic.service;
 
-import com.codecool.petclinic.configuration.DbConfiguration;
 import com.codecool.petclinic.model.Pet;
+import com.codecool.petclinic.repository.OwnerDao;
 import com.codecool.petclinic.repository.PetDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -12,11 +11,13 @@ import java.util.Set;
 @Service
 public class PetService {
     private PetDao petDao;
+    private OwnerDao ownerDao;
 
 
     @Autowired
-    public PetService(PetDao petDao) {
+    public PetService(PetDao petDao, OwnerDao ownerDao) {
         this.petDao = petDao;
+        this.ownerDao = ownerDao;
     }
 
     public Set<Pet> getAllPets() {
@@ -24,8 +25,15 @@ public class PetService {
         return pets;
     }
 
-    public void addPet(Pet petToAdd) {
-        petDao.addPet(petToAdd);
+    public Pet getPetById(int petId) {
+        Pet pet = petDao.getPetById(petId);
+        return pet;
+    }
+
+    public void addPet(Pet petToAdd, int ownerId) {
+        petToAdd.setOwnerId(ownerId);
+        int petId = petDao.addPet(petToAdd);
+        ownerDao.addPetIdToOwner(ownerId, petId);
     }
 
     public void updatePet(Pet petToUpdate, int id) {

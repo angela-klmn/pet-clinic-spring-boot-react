@@ -1,24 +1,26 @@
 package com.codecool.petclinic.model;
 
+import com.codecool.petclinic.model.types.PetType;
+
 import java.time.LocalDate;
 import java.util.Set;
 
 
 public class Pet {
-    private static int idTracker = 0;
+    private static int idTracker = 1;
 
     private int id;
     private String name;
     private LocalDate birthDate;
     private PetType type;
-    private Owner owner;
+    private int ownerId;
     private Set<Treatment> treatments;
 
-    public Pet(String name, LocalDate birthDate, PetType type, Owner owner, Set<Treatment> treatments) {
+    public Pet(String name, LocalDate birthDate, PetType type, int ownerId, Set<Treatment> treatments) {
         this.name = name;
         this.birthDate = birthDate;
         this.type = type;
-        this.owner = owner;
+        this.ownerId = ownerId;
         this.treatments = treatments;
 
         this.id = idTracker;
@@ -58,12 +60,12 @@ public class Pet {
         this.type = type;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public int getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
     public Set<Treatment> getTreatments() {
@@ -81,7 +83,7 @@ public class Pet {
                 ", name='" + name + '\'' +
                 ", birthDate=" + birthDate +
                 ", type=" + type +
-                ", owner=" + owner +
+                ", owner=" + ownerId +
                 ", treatments=" + treatments +
                 '}';
     }
