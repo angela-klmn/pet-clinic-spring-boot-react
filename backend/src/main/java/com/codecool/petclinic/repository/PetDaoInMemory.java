@@ -1,6 +1,5 @@
 package com.codecool.petclinic.repository;
 
-import com.codecool.petclinic.model.Owner;
 import com.codecool.petclinic.model.Pet;
 import com.codecool.petclinic.model.types.PetType;
 

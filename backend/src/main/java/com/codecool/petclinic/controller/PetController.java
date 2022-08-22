@@ -3,7 +3,6 @@ package com.codecool.petclinic.controller;
 import com.codecool.petclinic.model.Pet;
 import com.codecool.petclinic.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
