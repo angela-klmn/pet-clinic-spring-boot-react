@@ -6,18 +6,18 @@ function App() {
 
   const [Owners, fetchOwners] = useState([])
 
-  const getData = () => {
+  const getData = (url, func) => {
     console.log("Something");
-    fetch('http://localhost:8080/owners')
+    fetch(url)
       .then((res) => res.json())
       .then((res) => {
         console.log(res)
-        fetchOwners(res)
+        func(res)
       })
   }
 
   useEffect(() => {
-    getData()
+    getData('http://localhost:8080/owners', fetchOwners)
   }, [])
 
 
