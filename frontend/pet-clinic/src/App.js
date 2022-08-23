@@ -1,48 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
 import React, { useState, useEffect } from 'react'
+import ListAllOwners from './components/ListAllOwners'
+import { apiGet } from './dataHandler'
+
 
 function App() {
 
-  const [Owners, fetchOwners] = useState([])
+  const [owners, fetchOwners] = useState([])
+  const [owner, fetchOwner] = useState([])
 
-  const getData = (url, func) => {
-    console.log("Something");
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res)
-        func(res)
-      })
+  const getOwners = () => {
+    apiGet('http://localhost:8080/owners').then(result => fetchOwners(result))
+  }
+
+  const getOwner = () => {
+    apiGet('http://localhost:8080/owner/1').then(result => fetchOwner(result))
   }
 
   useEffect(() => {
-    getData('http://localhost:8080/owners', fetchOwners)
+    getOwners()
   }, [])
 
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Szia Kristóf!   :)</h1>
-        <ul>
-        {Owners.map((item, i) => {
-          return <li key={i}>{item.firstName}</li>
-        })}
-      </ul>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+
+        <h1>Header</h1>
+        <ListAllOwners owners={owners}/>
+
+
     </div>
   );
 }
