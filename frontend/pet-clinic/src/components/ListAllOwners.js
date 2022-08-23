@@ -10,18 +10,21 @@ const ListAllOwners = ({owners}) => {
       </ul> */}
 
 
-      <table>
+      <table class="table table-striped">
         <tr>
-          <th>Name</th>
-          <th>e-mail</th>
-          <th>Some buttons</th>
+          <th scope="col">Name</th>
+          <th scope="col">e-mail</th>
+          <th scope="col">Some buttons</th>
         </tr>
         {owners.map((val, key) => {
           return (
             <tr key={key}>
               <td>{val.firstName}  {val.lastName}</td>
               <td>{val.eMail}</td>
-              <td><button><a href='https://google.com' alt='Broken Link'>This is a button</a></button></td>
+              <td>
+                <button class="btn btn-info"><a href={'http://localhost:8080/owners/'+val.id} alt='Broken Link'>Details</a></button>
+                <button class="btn btn-info"><a href={'http://localhost:8080/owners/'+val.id} alt='Broken Link'>Delete</a></button>  
+              </td>
             </tr>
           )
         })}
