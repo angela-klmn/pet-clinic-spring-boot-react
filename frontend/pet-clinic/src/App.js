@@ -1,19 +1,40 @@
 import React, { useState, useEffect } from 'react'
 import ListAllOwners from './components/ListAllOwners'
-import { apiGet } from './dataHandler'
+import Header from './components/Header'
+import { apiGet, apiDelete } from './dataHandler'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
 
   const [owners, fetchOwners] = useState([])
-  const [owner, fetchOwner] = useState([])
+  const [owner, fetchOwner] = useState({})
 
   const getOwners = () => {
     apiGet('http://localhost:8080/owners').then(result => fetchOwners(result))
   }
 
-  const getOwner = () => {
-    apiGet('http://localhost:8080/owner/1').then(result => fetchOwner(result))
+  const getOwner = (ownerId) => {
+    console.log('http://localhost:8080/owners/' + ownerId)
+    apiGet('http://localhost:8080/owners/' + ownerId)
+    .then(result => fetchOwner(result))
+    .then(console.log(owner))
+  }
+
+  const handleDelete = (ownerId) => {
+    console.log('This will delet owner with id:' + ownerId)
+    apiDelete('http://localhost:8080/owners/' + ownerId).then(getOwners);
+    // getOwners();
+
+    // const newOwners= owners.filter(owner => owner.id != ownerId);
+    // fetchOwners(newOwners);
+  }
+
+  const handleGetDetails = (ownerId) => {
+    console.log('This will get owner with id:' + ownerId)
+    // const currentOwner = owners.filter(owner => owner.id === ownerId)[0]
+    getOwner(ownerId)
+  
   }
 
   useEffect(() => {
@@ -22,11 +43,12 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className='container'>
 
 
-        <h1>Header</h1>
-        <ListAllOwners owners={owners}/>
+        <Header />
+        
+        <ListAllOwners owners={owners} handleDelete={handleDelete} handleGetDetails={handleGetDetails}/>
 
 
     </div>

@@ -31,12 +31,12 @@ public class OwnerController {
     }
 
     @DeleteMapping("/owners/{id}")
-    public String deleteOwner(@PathVariable int id) {
+    public void deleteOwner(@PathVariable int id) {
         Owner deletedOwner = ownerService.deleteOwner(id);
-        if (deletedOwner == null) {
-            return "Could NOT delete Owner";
-        }
-        return "Successfully deleted: " + deletedOwner;
+//        if (deletedOwner == null) {
+//            return "Could NOT delete Owner";
+//        }
+//        return "Successfully deleted: " + deletedOwner;
     }
 
     @PostMapping(value = "/owners/add")

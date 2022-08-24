@@ -1,6 +1,8 @@
 import React from 'react'
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 
-const ListAllOwners = ({owners}) => {
+const ListAllOwners = ({owners, handleDelete, handleGetDetails}) => {
   return (
     <div>
       {/* <ul>
@@ -10,25 +12,29 @@ const ListAllOwners = ({owners}) => {
       </ul> */}
 
 
-      <table class="table table-striped">
+      <Table striped bordered hover>
+      <thead>
         <tr>
           <th scope="col">Name</th>
           <th scope="col">e-mail</th>
           <th scope="col">Some buttons</th>
         </tr>
-        {owners.map((val, key) => {
+       </thead>
+       <tbody>
+        {owners.map((owner, key) => {
           return (
             <tr key={key}>
-              <td>{val.firstName}  {val.lastName}</td>
-              <td>{val.eMail}</td>
+              <td>{owner.firstName}  {owner.lastName}</td>
+              <td>{owner.eMail}</td>
               <td>
-                <button class="btn btn-info"><a href={'http://localhost:8080/owners/'+val.id} alt='Broken Link'>Details</a></button>
-                <button class="btn btn-info"><a href={'http://localhost:8080/owners/'+val.id} alt='Broken Link'>Delete</a></button>  
+                <button onClick={() => handleGetDetails(owner.id)}>Details</button>
+                <button onClick={() => handleDelete(owner.id)}>Delete</button>  
               </td>
             </tr>
           )
         })}
-      </table>
+        </tbody>
+      </Table>
     
 
     </div>
