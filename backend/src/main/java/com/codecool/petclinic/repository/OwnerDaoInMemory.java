@@ -13,6 +13,7 @@ public class OwnerDaoInMemory implements OwnerDao {
         ownerStorage.add(new Owner("John", "Lennon", null, "john@lennon.com"));
         ownerStorage.add(new Owner("Janet", "Jackson", null, "janet@jackson.org"));
         ownerStorage.add(new Owner("Mick", "Jagger", null, "mick@jagger.net"));
+        ownerStorage.add(new Owner("Tina", "Turner", null, "tina@turner.com"));
     }
 
     @Override

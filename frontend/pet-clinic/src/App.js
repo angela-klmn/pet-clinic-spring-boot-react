@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import ListAllOwners from './components/ListAllOwners'
 import Header from './components/Header'
-import { apiGet, apiDelete } from './dataHandler'
+import { apiGet, apiDelete, apiPost } from './dataHandler'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OwnerDetails from './components/OwnerDetails';
+import AddNewUser from './components/AddNewUser';
 
 
 function App() {
@@ -32,18 +33,17 @@ function App() {
 
   const handleGetDetails = (ownerId) => {
     console.log('This will get owner with id:' + ownerId)
-    // const currentOwner = owners.filter(owner => owner.id === ownerId)[0]
     getOwner(ownerId)
-
-    setTimeout(() => {
-      console.log(owner)
-     }, 2000);
-  
   }
 
   const handleCloseDetails = () => {
     fetchOwner({empty: true})
   }
+
+const handelAddNewUser = (newUser) => {
+  apiPost("http://localhost:8080/owners/add", newUser).then(getOwners())
+}
+
 
   useEffect(() => {
     getOwners()
@@ -62,7 +62,10 @@ function App() {
 
         {owner.empty != true &&
         <OwnerDetails owner={owner} handleCloseDetails={handleCloseDetails}/>
+        
       }
+      <hr />
+      <AddNewUser handelAddNewUser={handelAddNewUser}/>
 
 
     </div>

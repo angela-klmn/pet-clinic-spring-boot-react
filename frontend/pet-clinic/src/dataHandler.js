@@ -15,11 +15,11 @@ export async function apiPost(url, payload) {
         headers: {"Content-type": "application/json"},
         body: JSON.stringify(payload)
     });
-    if (response.status === 200) {
-        let data = response.json();
-        return data;
+    // if (response.status === 200) {
+    //     let data = response.json();
+    //     return data;
 
-    }
+    // }
 }
 
 export async function apiDelete(url) {
