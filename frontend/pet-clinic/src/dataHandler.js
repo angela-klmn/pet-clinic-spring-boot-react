@@ -20,5 +20,27 @@ export async function apiPost(url, payload) {
         return data;
 
     }
+
+    export async function apiPut(url, payload) {
+        let response = await fetch(url, {
+            method: "PUT",
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify(payload)
+        });
+        if (response.status === 200) {
+            let data = response.json();
+            return data;
+        }
+    }
+
+    export async function apiDelete(url) {
+        let response = await fetch(url, {
+            method: "DELETE",
+        });
+        if (response.status === 200) {
+            let data = response.json();
+            return data;
+        }
+    }
 }
 
