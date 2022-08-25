@@ -1,5 +1,5 @@
 import React from 'react'
-import myImage from '../../src/images/dog_and_cat_1.jpg'
+import myImage from '../../src/images/dog_and_cat_2.jpg'
 
 const OwnerDetails = ({owner, handleCloseDetails}) => {
   return (
@@ -15,13 +15,13 @@ const OwnerDetails = ({owner, handleCloseDetails}) => {
         <p>Last name: {owner.lastName} </p>
         <p>e mail adress: {owner.eMail} </p>
 
-    <button onClick={() => handleCloseDetails()}>Close Details</button>  
+    <button className='btn btn-outline-secondary' onClick={() => handleCloseDetails()}>Close Details</button>  
     </div>
 
     <div>
         <br />
        
-    <img src={myImage} width={350} alt="doctor animals"/>
+    <img src={myImage} width={450} alt="doctor animals"/>
     </div>
     </div>
   )

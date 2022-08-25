@@ -14,7 +14,8 @@ const ListAllOwners = ({owners, handleDelete, handleGetDetails}) => {
         <tr>
           <th>Name</th>
           <th>e-mail</th>
-          <th>Some buttons</th>
+          <th>Details</th>
+          <th>Delete</th>
         </tr>
        </thead>
        <tbody>
@@ -24,9 +25,10 @@ const ListAllOwners = ({owners, handleDelete, handleGetDetails}) => {
               <td>{owner.firstName}  {owner.lastName}</td>
               <td>{owner.eMail}</td>
               <td>
-                <button onClick={() => handleGetDetails(owner.id)}>Details</button>
-                <button onClick={() => handleDelete(owner.id)}>Delete</button>  
+                <button className="btn btn-outline-secondary" onClick={() => handleGetDetails(owner.id)}>Details</button>
+                
               </td>
+              <td><button className="btn btn-outline-secondary" onClick={() => handleDelete(owner.id)}>Delete</button>  </td>
             </tr>
           )
         })}
