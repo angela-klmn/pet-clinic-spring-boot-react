@@ -40,9 +40,8 @@ public class OwnerController {
     }
 
     @PostMapping(value = "/owners/add")
-    public String addOwner(@RequestBody Owner ownerToAdd) {
+    public void addOwner(@RequestBody Owner ownerToAdd) {
         ownerService.addOwner(ownerToAdd);
-        return ownerToAdd.toString();
 
     }
 
