@@ -12,8 +12,6 @@ const AddNewUser = ({handelAddNewUser}) => {
         newUser.firstName = firstName;
         newUser.lastName = lastName;
         newUser.eMail = eMail;
-        console.log(newUser);
-        console.log("what?");
         handelAddNewUser(newUser);
     }
 
@@ -43,7 +41,6 @@ const AddNewUser = ({handelAddNewUser}) => {
         
             <br />
             <input type="submit" value="Add New User" />
-            <p>{firstName}</p>
         </form>
         </div>
         

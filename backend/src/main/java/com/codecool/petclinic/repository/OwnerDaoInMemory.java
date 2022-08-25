@@ -42,14 +42,16 @@ public class OwnerDaoInMemory implements OwnerDao {
 
     @Override
     public void updateOwner(Owner transferOwner, int id) {
+
         Owner owner = getOwnerById(id);
-        if (transferOwner.getFirstName() != null) {
+        System.out.println("t.lastname" + transferOwner.getLastName());
+        if (!(transferOwner.getFirstName() == null || ("").equals(transferOwner.getFirstName()))) {
             owner.setFirstName(transferOwner.getFirstName());
         }
-        if (transferOwner.getLastName() != null) {
+        if (!(transferOwner.getLastName() == null || ("").equals(transferOwner.getLastName()))) {
             owner.setLastName(transferOwner.getLastName());
         }
-        if (transferOwner.geteMail() != null) {
+        if (!(transferOwner.geteMail() == null || ("").equals(transferOwner.geteMail()))) {
             owner.seteMail(transferOwner.geteMail());
         }
     }

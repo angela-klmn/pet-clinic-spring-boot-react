@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ListAllOwners from './components/ListAllOwners'
 import Header from './components/Header'
-import { apiGet, apiDelete, apiPost } from './dataHandler'
+import {apiGet, apiDelete, apiPost, apiPut} from './dataHandler'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OwnerDetails from './components/OwnerDetails';
 import AddNewUser from './components/AddNewUser';
@@ -17,22 +17,14 @@ function App() {
   }
 
   const getOwner = (ownerId) => {
-    console.log('http://localhost:8080/owners/' + ownerId)
     apiGet('http://localhost:8080/owners/' + ownerId).then(result => fetchOwner(result))
-    
   }
 
   const handleDelete = (ownerId) => {
-    console.log('This will delet owner with id:' + ownerId)
     apiDelete('http://localhost:8080/owners/' + ownerId).then(getOwners);
-    // getOwners();
-
-    // const newOwners= owners.filter(owner => owner.id != ownerId);
-    // fetchOwners(newOwners);
   }
 
   const handleGetDetails = (ownerId) => {
-    console.log('This will get owner with id:' + ownerId)
     getOwner(ownerId)
   }
 
@@ -44,6 +36,10 @@ const handelAddNewUser = (newUser) => {
   apiPost("http://localhost:8080/owners/add", newUser).then(getOwners())
 }
 
+  const handelUpdateUser = (newUser, ownerId) => {
+    apiPut("http://localhost:8080/owners/update/"+ ownerId, newUser).then(getOwners())
+  }
+
 
   useEffect(() => {
     getOwners()
@@ -53,21 +49,15 @@ const handelAddNewUser = (newUser) => {
 
   return (
     <div className='container'>
-
-
         <Header />
-        
         <ListAllOwners owners={owners} handleDelete={handleDelete} handleGetDetails={handleGetDetails}/>
-      
 
         {owner.empty != true &&
-        <OwnerDetails owner={owner} handleCloseDetails={handleCloseDetails}/>
-        
+        <OwnerDetails owner={owner} handleCloseDetails={handleCloseDetails} handleUpdateUser={handelUpdateUser}/>
       }
+
       <hr />
       <AddNewUser handelAddNewUser={handelAddNewUser}/>
-
-
     </div>
   );
 }
