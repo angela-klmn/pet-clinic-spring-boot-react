@@ -10,10 +10,10 @@ public class OwnerDaoInMemory implements OwnerDao {
     Set<Owner> ownerStorage = new HashSet<>();
 
     public OwnerDaoInMemory() {
-        ownerStorage.add(new Owner("John", "Lennon", null, "john@lennon.com"));
-        ownerStorage.add(new Owner("Janet", "Jackson", null, "janet@jackson.org"));
-        ownerStorage.add(new Owner("Mick", "Jagger", null, "mick@jagger.net"));
-        ownerStorage.add(new Owner("Tina", "Turner", null, "tina@turner.com"));
+//        ownerStorage.add(new Owner("John", "Lennon", "john@lennon.com"));
+//        ownerStorage.add(new Owner("Janet", "Jackson", "janet@jackson.org"));
+//        ownerStorage.add(new Owner("Mick", "Jagger",  "mick@jagger.net"));
+//        ownerStorage.add(new Owner("Tina", "Turner",  "tina@turner.com"));
     }
 
     @Override
@@ -51,8 +51,8 @@ public class OwnerDaoInMemory implements OwnerDao {
         if (!(transferOwner.getLastName() == null || ("").equals(transferOwner.getLastName()))) {
             owner.setLastName(transferOwner.getLastName());
         }
-        if (!(transferOwner.geteMail() == null || ("").equals(transferOwner.geteMail()))) {
-            owner.seteMail(transferOwner.geteMail());
+        if (!(transferOwner.getemail() == null || ("").equals(transferOwner.getemail()))) {
+            owner.setemail(transferOwner.getemail());
         }
     }
 
@@ -72,7 +72,7 @@ public class OwnerDaoInMemory implements OwnerDao {
     @Override
     public void addPetIdToOwner(int ownerId, int petId) {
         Owner owner = getOwnerById(ownerId);
-        owner.addPetId(petId);
+        //owner.addPetId(petId);
 
     }
 }

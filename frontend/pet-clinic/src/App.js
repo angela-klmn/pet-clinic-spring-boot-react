@@ -37,7 +37,8 @@ const handelAddNewUser = (newUser) => {
 }
 
   const handelUpdateUser = (newUser, ownerId) => {
-    apiPut("http://localhost:8080/owners/update/"+ ownerId, newUser).then(getOwners())
+    apiPut("http://localhost:8080/owners/update/"+ ownerId, newUser).then(getOwner()).then(getOwners())
+
   }
 
 
@@ -50,11 +51,15 @@ const handelAddNewUser = (newUser) => {
   return (
     <div className='container'>
         <Header />
-        <ListAllOwners owners={owners} handleDelete={handleDelete} handleGetDetails={handleGetDetails}/>
+        <ListAllOwners owners={owners} 
+          handleDelete={handleDelete} 
+          handleGetDetails={handleGetDetails}/>
 
         {owner.empty != true &&
-        <OwnerDetails owner={owner} handleCloseDetails={handleCloseDetails} handleUpdateUser={handelUpdateUser}/>
-      }
+        <OwnerDetails owner={owner} 
+          handleCloseDetails={handleCloseDetails} 
+          handleUpdateUser={handelUpdateUser}/>
+        }
 
       <hr />
       <AddNewUser handelAddNewUser={handelAddNewUser}/>

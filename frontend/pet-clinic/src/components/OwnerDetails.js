@@ -13,7 +13,7 @@ const OwnerDetails = ({owner, handleCloseDetails, handleUpdateUser}) => {
 
         <br />
         <br/>
-        <h1>Owner Profile Details: </h1><br/>
+        <h1>Owner Profile: </h1><br/>
         <p>Owner Id: {owner.id} </p>
         <p>First name: <strong>{owner.firstName} </strong></p>
         <p>Last name: {owner.lastName} </p>
