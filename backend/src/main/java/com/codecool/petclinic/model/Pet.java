@@ -1,38 +1,47 @@
 package com.codecool.petclinic.model;
 
 import com.codecool.petclinic.model.types.PetType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
-
+@Entity
+@Table(name = "pet")
 public class Pet {
-    private static int idTracker = 1;
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private LocalDate birthDate;
     private PetType type;
-    private int ownerId;
-    private Set<Treatment> treatments;
+    @ManyToOne
+    @JoinColumn(
+            name = "owner_id",
+            nullable = false
+    )
+    @JsonIgnore
+    private Owner owner;
+    //private Set<Treatment> treatments;
 
-    public Pet(String name, LocalDate birthDate, PetType type, int ownerId, Set<Treatment> treatments) {
+
+
+    public Pet(String name, LocalDate birthDate, PetType type) {
         this.name = name;
         this.birthDate = birthDate;
         this.type = type;
-        this.ownerId = ownerId;
-        this.treatments = treatments;
-
-        this.id = idTracker;
-        idTracker++;
-
     }
 
-    public int getId() {
+    public Pet() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -60,21 +69,21 @@ public class Pet {
         this.type = type;
     }
 
-    public int getOwnerId() {
-        return ownerId;
+    public Owner getOwner() {
+        return owner;
     }
 
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
-    public Set<Treatment> getTreatments() {
-        return treatments;
-    }
-
-    public void setTreatments(Set<Treatment> treatments) {
-        this.treatments = treatments;
-    }
+//    public Set<Treatment> getTreatments() {
+//        return treatments;
+//    }
+//
+//    public void setTreatments(Set<Treatment> treatments) {
+//        this.treatments = treatments;
+//    }
 
     @Override
     public String toString() {
@@ -83,8 +92,8 @@ public class Pet {
                 ", name='" + name + '\'' +
                 ", birthDate=" + birthDate +
                 ", type=" + type +
-                ", owner=" + ownerId +
-                ", treatments=" + treatments +
+                //", owner=" + owner +
+                //", treatments=" + treatments +
                 '}';
     }
 }
