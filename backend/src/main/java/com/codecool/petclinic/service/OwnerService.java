@@ -1,46 +1,58 @@
 package com.codecool.petclinic.service;
 
+import com.codecool.petclinic.model.DTOs.OwnerDTO;
 import com.codecool.petclinic.model.Owner;
-import com.codecool.petclinic.repository.OwnerDao;
+import com.codecool.petclinic.repository.JpaOwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class OwnerService {
-    private OwnerDao ownerDao;
+
+    private JpaOwnerRepository jpaOwnerRepository;
 
 
     @Autowired
-    public OwnerService(OwnerDao ownerDao) {
-        this.ownerDao = ownerDao;
+    public OwnerService(JpaOwnerRepository jpaOwnerRepository) {
+        this.jpaOwnerRepository = jpaOwnerRepository;
     }
 
-    public Set<Owner> getAllOwners() {
-        Set<Owner> owners = ownerDao.getAllOwners();
+    public List<Owner> getAllOwners() {
+        List<Owner> owners = jpaOwnerRepository.findAll();
         return owners;
     }
 
-    public Owner getOwnerById(int ownerId) {
-        Owner owner = ownerDao.getOwnerById(ownerId);
+    public Owner getOwnerById(Long ownerId) {
+        Owner owner = jpaOwnerRepository.findById(ownerId).get();
         return owner;
     }
 
     public void addOwner(Owner ownerToAdd) {
-        ownerDao.addOwner(ownerToAdd);
+        jpaOwnerRepository.save(ownerToAdd);
     }
 
-    public void updateOwner(Owner ownerToUpdate, int id) {
-        ownerDao.updateOwner(ownerToUpdate, id);
+
+    public void updateOwner(OwnerDTO ownerDTO, Long ownerId) {
+        Owner ownerToUpdate = jpaOwnerRepository.getReferenceById(ownerId);
+        if (!(ownerDTO.getFirstName() == "" || ownerDTO.getFirstName() == null)) {
+            ownerToUpdate.setFirstName(ownerDTO.getFirstName());
+        }
+        if (!(ownerDTO.getLastName() == "" || ownerDTO.getLastName() == null)) {
+            ownerToUpdate.setLastName(ownerDTO.getLastName());
+        }
+        if (!(ownerDTO.getEmail() == "" || ownerDTO.getEmail() == null)) {
+            ownerToUpdate.setEmail(ownerDTO.getEmail());
+        }
+        if (!(ownerDTO.getPhoneNumber() == "" || ownerDTO.getPhoneNumber() == null)) {
+            ownerToUpdate.setPhoneNumber(ownerDTO.getPhoneNumber());
+        }
+        jpaOwnerRepository.save(ownerToUpdate);
     }
 
-    public Owner deleteOwner(int id) {
-        Owner deletedOwner = ownerDao.deleteOwner(id);
-        return deletedOwner;
+    public void deleteOwner(Long id) {
+        jpaOwnerRepository.deleteById(id);
     }
 
-    public void addPetIdToOwner(int ownerId, int petId) {
-        ownerDao.addPetIdToOwner(ownerId, petId);
-    }
 }

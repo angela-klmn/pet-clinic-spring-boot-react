@@ -51,8 +51,8 @@ public class OwnerDaoInMemory implements OwnerDao {
         if (!(transferOwner.getLastName() == null || ("").equals(transferOwner.getLastName()))) {
             owner.setLastName(transferOwner.getLastName());
         }
-        if (!(transferOwner.getemail() == null || ("").equals(transferOwner.getemail()))) {
-            owner.setemail(transferOwner.getemail());
+        if (!(transferOwner.getEmail() == null || ("").equals(transferOwner.getEmail()))) {
+            owner.setEmail(transferOwner.getEmail());
         }
     }
 
