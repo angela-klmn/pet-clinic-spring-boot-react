@@ -12,8 +12,8 @@ public class PetDaoInMemory implements PetDao {
     Set<Pet> petStorage = new HashSet<>();
 
     public PetDaoInMemory() {
-        petStorage.add(new Pet("Doggie", LocalDate.of(2020, 1, 8), PetType.DOG, 0, null));
-        petStorage.add(new Pet("Bunny", LocalDate.of(2022, 1, 9), PetType.BUNNY, 0, null));
+        petStorage.add(new Pet("Doggie", LocalDate.of(2020, 1, 8), PetType.DOG));
+        petStorage.add(new Pet("Bunny", LocalDate.of(2022, 1, 9), PetType.BUNNY));
     }
 
     @Override
@@ -36,7 +36,7 @@ public class PetDaoInMemory implements PetDao {
     }
 
     @Override
-    public int addPet(Pet pet) {
+    public Long addPet(Pet pet) {
         petStorage.add(pet);
         System.out.println("This pet was added: " + pet);
         return pet.getId();
@@ -54,8 +54,8 @@ public class PetDaoInMemory implements PetDao {
         if (transferPet.getType() != null) {
             pet.setType(transferPet.getType());
         }
-        if (transferPet.getOwnerId() != 0) {
-            pet.setOwnerId(transferPet.getOwnerId());
+        if (transferPet.getOwner() != null) {
+            pet.setOwner(transferPet.getOwner());
         }
         }
 
