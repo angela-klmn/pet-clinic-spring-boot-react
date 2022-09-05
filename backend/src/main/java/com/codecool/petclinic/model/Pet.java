@@ -24,7 +24,11 @@ public class Pet {
     )
     @JsonIgnore
     private Owner owner;
-    //private Set<Treatment> treatments;
+    @OneToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            mappedBy = "pet"
+    )
+    private Set<Visit> treatments;
 
 
 
