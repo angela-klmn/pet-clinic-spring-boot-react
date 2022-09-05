@@ -2,6 +2,7 @@ package com.codecool.petclinic.model;
 
 import com.codecool.petclinic.model.types.PetType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -24,7 +25,11 @@ public class Pet {
     )
     @JsonIgnore
     private Owner owner;
-    //private Set<Treatment> treatments;
+    @OneToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            mappedBy = "pet"
+    )
+    private Set<Visit> visits;
 
 
 
@@ -85,6 +90,10 @@ public class Pet {
 //        this.treatments = treatments;
 //    }
 
+    public void addVisit(Visit visit) {
+        visits.add(visit);
+    }
+
     @Override
     public String toString() {
         return "Pet{" +
@@ -96,4 +105,6 @@ public class Pet {
                 //", treatments=" + treatments +
                 '}';
     }
+
+
 }
