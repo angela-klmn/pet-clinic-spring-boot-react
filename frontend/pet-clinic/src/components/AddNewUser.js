@@ -4,14 +4,14 @@ import myImage from '../../src/images/cat_1.jpg'
 const AddNewUser = ({handelAddNewUser}) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [eMail, seteMail] = useState('')
+    const [email, setEmail] = useState('')
 
-    let newUser = {"firstName": "Tina", "lastName": "Turner", "petIds": null, "eMail": "tina@turner.com" }
+    let newUser = {"firstName": "Tina", "lastName": "Turner", "petIds": null, "email": "tina@turner.com" }
 
     const addNewUser = () => {
         newUser.firstName = firstName;
         newUser.lastName = lastName;
-        newUser.eMail = eMail;
+        newUser.email = email;
         handelAddNewUser(newUser);
     }
 
@@ -37,7 +37,7 @@ const AddNewUser = ({handelAddNewUser}) => {
             <input type="text" required value={lastName} onChange={(e) => {setLastName(e.target.value)}}/><br />
            
             <label>E mail: </label><br />
-            <input type="email" required value={eMail} onChange={(e) => {seteMail(e.target.value)}}/><br />
+            <input type="email" required value={email} onChange={(e) => {setEmail(e.target.value)}}/><br />
         
             <br />
             <input type="submit" value="Add New User" />

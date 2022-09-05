@@ -3,14 +3,14 @@ import React, { useState } from 'react'
 const UpdateUser = ({owner,handelUpdateUser}) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [eMail, seteMail] = useState('')
+    const [email, setEmail] = useState('')
 
-    let newUser = {"firstName": null, "lastName": null, "petIds": null, "eMail": null }
+    let newUser = {"firstName": null, "lastName": null, "petIds": null, "email": null }
 
     const updateUser = () => {
         newUser.firstName = firstName;
         newUser.lastName = lastName;
-        newUser.eMail = eMail;
+        newUser.email = email;
         handelUpdateUser(newUser, owner.id)
     }
 
@@ -30,8 +30,8 @@ const UpdateUser = ({owner,handelUpdateUser}) => {
             <label>Last Name: </label><br />
             <input type="text" value={lastName} placeholder={owner.lastName} onChange={(e) => {setLastName(e.target.value)}}/><br />
            
-            <label>E mail: </label><br />
-            <input type="email" value={eMail} placeholder={owner.eMail} onChange={(e) => {seteMail(e.target.value)}}/><br />
+            <label>E-mail: </label><br />
+            <input type="email" value={email} placeholder={owner.Email} onChange={(e) => {setEmail(e.target.value)}}/><br />
         
             <br />
             <input type="submit" value="Update" />
