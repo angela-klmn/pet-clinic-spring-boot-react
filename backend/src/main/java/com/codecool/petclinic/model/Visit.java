@@ -18,12 +18,17 @@ public class Visit {
     @ManyToOne
     private Pet pet;
 
-    public Visit(TreatmentType treatmentType, String description, int price) {
+    public Visit(TreatmentType treatmentType, String description, int price, Pet pet) {
         this.treatmentType = treatmentType;
         this.description = description;
         this.price = price;
+        this.pet = pet;
     }
 
     public Visit() {
+    }
+
+    public void setPet(Pet pet) {
+        this.pet = pet;
     }
 }
