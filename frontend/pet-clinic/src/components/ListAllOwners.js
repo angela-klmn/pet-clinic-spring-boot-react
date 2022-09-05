@@ -23,10 +23,9 @@ const ListAllOwners = ({owners, handleDelete, handleGetDetails}) => {
           return (
             <tr key={key}>
               <td>{owner.firstName}  {owner.lastName}</td>
-              <td>{owner.eMail}</td>
+              <td>{owner.email}</td>
               <td>
-                <button className="btn btn-outline-secondary" onClick={() => handleGetDetails(owner.id)}>Details</button>
-                
+                <button className="btn btn-outline-secondary" onClick={() => handleGetDetails(owner.id)}>Details</button> 
               </td>
               <td><button className="btn btn-outline-secondary" onClick={() => handleDelete(owner.id)}>Delete</button>  </td>
             </tr>

@@ -1,36 +1,55 @@
 package com.codecool.petclinic.model;
 
-import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-
+@Entity(name="owner")
+@Table(
+        name="owner",
+        uniqueConstraints = {@UniqueConstraint(name="owner_email_unique", columnNames = "email")}
+)
 public class Owner {
-    private static int idTracker = 1;
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(updatable = false)
+    private Long id;
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
-    private Set<Integer> petIds;
-    private String eMail;
+
+    @Column(nullable = false)
+    private String email;
+    private String phoneNumber;
+
+    @OneToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            mappedBy = "owner"
+    )
+    //@JsonIgnore
+    private Set<Pet> pets = new HashSet<>();
+
 
     public Owner() {
-        this.id = idTracker;
-        idTracker++;
     }
 
-    public Owner(String firstName, String lastName, Set<Integer> petIds, String eMail) {
-        this.id = idTracker;
-        idTracker++;
+    public Owner(String firstName, String lastName, String email, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.petIds = petIds;
-        this.eMail = eMail;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
 
-    public int getId() {
+
+
+    public Long getId() {
         return id;
     }
 
@@ -51,20 +70,26 @@ public class Owner {
         this.lastName = lastName;
     }
 
-    public Set<Integer> getPetIds() {
-        return petIds;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPetIds(Set<Integer> petIds) {
-        this.petIds = petIds;
+    public void setEmail(String eMail) {
+        this.email = eMail;
     }
 
-    public String geteMail() {
-        return eMail;
+    public void addPet(Pet pet) {
+        if (!this.pets.contains(pet)) {
+            this.pets.add(pet);
+            pet.setOwner(this);
+        }
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void removePet(Pet pet) {
+        if (this.pets.contains(pet)) {
+            this.pets.remove(pet);
+            pet.setOwner(null);
+        }
     }
 
     @Override
@@ -73,17 +98,38 @@ public class Owner {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", petIds=" + petIds +
-                ", eMail='" + eMail + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", pets=" + pets +
                 '}';
     }
 
-    public void addPetId(int petId) {
-        if (petIds == null) {
-            petIds = new HashSet<>();
-            petIds.add(petId);
-        } else {
-            petIds.add(petId);
-        }
+    public void setId(Long id) {
+        this.id = id;
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Set<Pet> getPets() {
+        return pets;
+    }
+
+    public void setPets(Set<Pet> pets) {
+        this.pets = pets;
+    }
+
+    //    public void addPetId(int petId) {
+//        if (petIds == null) {
+//            petIds = new HashSet<>();
+//            petIds.add(petId);
+//        } else {
+//            petIds.add(petId);
+//        }
+//    }
 }

@@ -1,10 +1,12 @@
 package com.codecool.petclinic.controller;
 
+import com.codecool.petclinic.model.DTOs.OwnerDTO;
 import com.codecool.petclinic.model.Owner;
 import com.codecool.petclinic.service.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -19,20 +21,20 @@ public class OwnerController {
 
 
     @GetMapping("/owners")
-    public Set<Owner> listAllOwners() {
-    Set<Owner> owners =  ownerService.getAllOwners();
+    public List<Owner> listAllOwners() {
+    List<Owner> owners =  ownerService.getAllOwners();
         return owners;
     }
 
     @GetMapping("/owners/{id}")
-    public Owner getOwner(@PathVariable int id) {
+    public Owner getOwner(@PathVariable Long id) {
         Owner owner = ownerService.getOwnerById(id);
         return owner;
     }
 
     @DeleteMapping("/owners/{id}")
-    public void deleteOwner(@PathVariable int id) {
-        Owner deletedOwner = ownerService.deleteOwner(id);
+    public void deleteOwner(@PathVariable Long id) {
+        ownerService.deleteOwner(id);
 //        if (deletedOwner == null) {
 //            return "Could NOT delete Owner";
 //        }
@@ -46,9 +48,9 @@ public class OwnerController {
     }
 
     @PutMapping(value = "/owners/update/{id}")
-    public void updateOwner(@RequestBody Owner ownerToUpdate, @PathVariable int id) {
-        System.out.println(ownerToUpdate);
-        ownerService.updateOwner(ownerToUpdate, id);
+    public void updateOwner(@RequestBody OwnerDTO ownerDTO, @PathVariable Long id) {
+        System.out.println(ownerDTO);
+        ownerService.updateOwner(ownerDTO, id);
         System.out.println("we are in updateOwner");
     }
 }

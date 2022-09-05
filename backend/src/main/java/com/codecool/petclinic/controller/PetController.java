@@ -5,6 +5,7 @@ import com.codecool.petclinic.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -24,35 +25,36 @@ public class PetController {
 
 
     @GetMapping("/pets")
-    public Set<Pet> listAllPets() {
-    Set<Pet> pets =  petService.getAllPets();
+    public List<Pet> listAllPets() {
+    List<Pet> pets =  petService.getAllPets();
         return pets;
     }
 
     @GetMapping("/pets/{id}")
-    public Pet getPet(@PathVariable int id) {
+    public Pet getPet(@PathVariable Long id) {
         Pet pet = petService.getPetById(id);
         return pet;
     }
 
     @DeleteMapping("/pets/{id}")
-    public String deletePet(@PathVariable int id) {
-        Pet deletedPet = petService.deletePet(id);
-        if (deletedPet == null) {
-            return "Could NOT delete pet";
-        }
-        return "Successfully deleted: " + deletedPet;
+    public void deletePet(@PathVariable Long id) {
+        petService.deletePet(id);
+//        if (deletedPet == null) {
+//            return "Could NOT delete pet";
+//        }
+//        return "Successfully deleted: " + deletedPet;
     }
 
     @PostMapping(value = "/pets/add/{ownerId}")
-    public String addPet(@RequestBody Pet petToAdd, @PathVariable int ownerId) {
+    public String addPet(@RequestBody Pet petToAdd, @PathVariable Long ownerId) {
         petService.addPet(petToAdd, ownerId);
+        System.out.println("controller add pet");
         return petToAdd.toString();
 
     }
 
     @PutMapping(value = "/pets/update/{id}")
-    public void updatePet(@RequestBody Pet petToUpdate, @PathVariable int id) {
+    public void updatePet(@RequestBody Pet petToUpdate, @PathVariable Long id) {
         petService.updatePet(petToUpdate, id);
     }
 }

@@ -8,7 +8,7 @@ public interface PetDao {
     Set<Pet> getAllPets();
     Pet getPetByName();
     Pet getPetById(int id);
-    int addPet(Pet pet);
+    Long addPet(Pet pet);
     void updatePet(Pet pet, int id);
 
     Pet deletePet(int id);

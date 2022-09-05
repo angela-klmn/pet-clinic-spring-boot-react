@@ -13,11 +13,12 @@ const OwnerDetails = ({owner, handleCloseDetails, handleUpdateUser}) => {
 
         <br />
         <br/>
-        <h1>Owner Profile Details: </h1><br/>
+        <h1>Owner Profile: </h1><br/>
         <p>Owner Id: {owner.id} </p>
         <p>First name: <strong>{owner.firstName} </strong></p>
         <p>Last name: {owner.lastName} </p>
-        <p>e mail address: {owner.eMail} </p>
+        <p>E-mail address: {owner.email} </p>
+        <p>Phone number: {owner.phoneNumber} </p>
 
             <button className='btn btn-outline-secondary' onClick={() => setOpenUpdate(true)}>Update</button>
             <button className='btn btn-outline-secondary' onClick={() => handleCloseDetails()}>Close Details</button>
