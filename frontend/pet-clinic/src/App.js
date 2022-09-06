@@ -5,6 +5,7 @@ import {apiGet, apiDelete, apiPost, apiPut} from './dataHandler'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OwnerDetails from './components/OwnerDetails';
 import AddNewUser from './components/AddNewUser';
+import NavigationBar from "./components/NavigationBar";
 
 
 function App() {
@@ -51,6 +52,8 @@ const handelAddNewUser = (newUser) => {
   return (
     <div className='container'>
         <Header />
+        <NavigationBar />
+
         <ListAllOwners owners={owners} 
           handleDelete={handleDelete} 
           handleGetDetails={handleGetDetails}/>
