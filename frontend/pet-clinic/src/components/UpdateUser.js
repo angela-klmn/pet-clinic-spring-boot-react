@@ -20,7 +20,7 @@ const UpdateUser = ({owner,handelUpdateUser}) => {
     <div>
         
         <br/>
-        <h1>Update User: </h1><br/>
+        <h1>Update Owner: </h1><br/>
 
         <form onSubmit={() => updateUser()} className="form">
         
