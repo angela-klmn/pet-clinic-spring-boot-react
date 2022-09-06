@@ -5,7 +5,12 @@ import {apiGet, apiDelete, apiPost, apiPut} from './dataHandler'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OwnerDetails from './components/OwnerDetails';
 import AddNewUser from './components/AddNewUser';
+
 import NavigationBar from "./components/NavigationBar";
+
+import NotFound from './components/NotFound';
+import Home from './components/Home';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 
 
 function App() {
@@ -58,14 +63,36 @@ const handelAddNewUser = (newUser) => {
           handleDelete={handleDelete} 
           handleGetDetails={handleGetDetails}/>
 
-        {owner.empty != true &&
-        <OwnerDetails owner={owner} 
-          handleCloseDetails={handleCloseDetails} 
-          handleUpdateUser={handelUpdateUser}/>
-        }
+        <BrowserRouter>
 
+          <Routes>
+            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/owners">
+                <Route index element={<ListAllOwners owners={owners} 
+                    handleDelete={handleDelete} 
+                    handleGetDetails={handleGetDetails}/>} />
+                <Route path=":id" element={<OwnerDetails owner={owner} 
+                    handleCloseDetails={handleCloseDetails} 
+                    handleUpdateUser={handelUpdateUser}/>} />
+                <Route path="add" element={<AddNewUser handelAddNewUser={handelAddNewUser}/> } />
+            </Route>
+
+            {/* <Route path="pets/:ownerId" element={<AllPetsOfOwner/>} />
+            <Route path="pets/add/:ownerId" element={<AllPetsOfOwner/>} />
+            <Route path="pet/:petId" element={<PetDetails/>} />
+
+            <Route path="visit/:visitId" element={<VisitDetails/>} />
+            <Route path="visit/add" element={<AddNewVisit/>} /> */}
+
+
+
+          </Routes>
+
+        </BrowserRouter>
+        
       <hr />
-      <AddNewUser handelAddNewUser={handelAddNewUser}/>
+      
     </div>
   );
 }
