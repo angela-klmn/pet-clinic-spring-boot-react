@@ -57,13 +57,7 @@ const handelAddNewUser = (newUser) => {
   return (
     <div className='container'>
         <Header />
-        <NavigationBar />
-
-        <ListAllOwners owners={owners} 
-          handleDelete={handleDelete} 
-          handleGetDetails={handleGetDetails}/>
-
-        <BrowserRouter>
+        <NavigationBar /> 
 
           <Routes>
             <Route path="*" element={<NotFound />} />
@@ -89,7 +83,7 @@ const handelAddNewUser = (newUser) => {
 
           </Routes>
 
-        </BrowserRouter>
+        
         
       <hr />
       

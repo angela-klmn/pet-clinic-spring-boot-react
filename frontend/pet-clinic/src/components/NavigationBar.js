@@ -5,14 +5,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
-import logo from '../../src/images/logo.jpg'
+// import logo from '../../src/images/logo.jpg'
 
 const NavigationBar = () => {
     return (
 
         <Navbar bg="light" expand="lg" sticky="top">
             <Container fluid>
-                <Image roundedCircle src={logo} width={80} />
+                {/* <Image roundedCircle src={logo} width={80} /> */}
                 <Navbar.Brand href="#">  Pet Clinic</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
