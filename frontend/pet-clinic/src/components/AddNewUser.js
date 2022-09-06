@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import myImage from '../../src/images/cat_1.jpg'
 
 const AddNewUser = ({handelAddNewUser}) => {
@@ -13,6 +14,7 @@ const AddNewUser = ({handelAddNewUser}) => {
         newUser.lastName = lastName;
         newUser.email = email;
         handelAddNewUser(newUser);
+    
     }
 
   return (
@@ -40,6 +42,7 @@ const AddNewUser = ({handelAddNewUser}) => {
             <input type="email" required value={email} onChange={(e) => {setEmail(e.target.value)}}/><br />
         
             <br />
+            
             <input type="submit" value="Add New User" />
         </form>
         </div>
