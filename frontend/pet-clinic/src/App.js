@@ -5,6 +5,9 @@ import {apiGet, apiDelete, apiPost, apiPut} from './dataHandler'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OwnerDetails from './components/OwnerDetails';
 import AddNewUser from './components/AddNewUser';
+
+import NavigationBar from "./components/NavigationBar";
+
 import NotFound from './components/NotFound';
 import Home from './components/Home';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
@@ -54,6 +57,12 @@ const handelAddNewUser = (newUser) => {
   return (
     <div className='container'>
         <Header />
+        <NavigationBar />
+
+        <ListAllOwners owners={owners} 
+          handleDelete={handleDelete} 
+          handleGetDetails={handleGetDetails}/>
+
         <BrowserRouter>
 
           <Routes>
