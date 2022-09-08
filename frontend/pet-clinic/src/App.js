@@ -29,6 +29,10 @@ function App() {
     apiDelete('http://localhost:8080/owners/' + ownerId).then(getOwners).then(navigate("/owners"));
   }
 
+  const handleDeletePet = (petId, ownerId) => {
+    apiDelete('http://localhost:8080/pets/' + petId).then(getOwners).then(navigate(-1));
+  }
+
 const handelAddNewUser = (newUser) => {
   apiPost("http://localhost:8080/owners/add", newUser).then(getOwners).then(navigate("/owners"))
 }
@@ -67,14 +71,14 @@ const handelAddNewUser = (newUser) => {
                 <Route index element={<ListAllOwners owners={owners} 
                     handleDelete={handleDelete} />} />
                 <Route path=":ownerId" element={<OwnerDetails  
-                    handleUpdateUser={handelUpdateUser}/>} />
+                    handleUpdateUser={handelUpdateUser} handleDelete={handleDelete}/>} />
                 <Route path="add" element={<AddNewUser handelAddNewUser={handelAddNewUser}/> } />
                 <Route path="search/:name" element={<ListAllOwners owners={searchedOwner}
                                                                         handleDelete={handleDelete}/> } />
 
             </Route>
             <Route path="pets/add/:ownerId" element={<AddNewPet handelAddNewPet={handelAddNewPet}/> } />
-            <Route path="pets/:petId" element={<PetDetails/> } />
+            <Route path="pets/:petId" element={<PetDetails handleDeletePet={handleDeletePet} /> } />
 
             {/* <Route path="pets/:ownerId" element={<AllPetsOfOwner/>} />
             <Route path="pets/add/:ownerId" element={<AllPetsOfOwner/>} />

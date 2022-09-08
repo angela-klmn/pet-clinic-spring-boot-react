@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import {apiGet} from '../dataHandler'
 import PetCard from './PetCard';
 
-const OwnerDetails = ({ handleUpdateUser}) => {
+const OwnerDetails = ({ handleUpdateUser, handleDelete}) => {
     let { ownerId } = useParams();
     console.log("owner id: " + ownerId)
 
@@ -60,7 +60,8 @@ const OwnerDetails = ({ handleUpdateUser}) => {
     </div>
 
     <div>
-    <button className='btn btn-outline-secondary' onClick={() => setOpenUpdate(true)}>Update</button><br/><br/>
+    <button className='btn btn-outline-secondary' onClick={() => setOpenUpdate(true)}>Update Client Details</button><br/><br/>
+    <button className="btn btn-outline-secondary" onClick={() => handleDelete(owner.id)}>Delete Client</button> <br/><br/>
             <Link to={`/pets/add/${owner.id}`}><button className='btn btn-outline-secondary'>Add new pet</button></Link>
             <br/><br/>
     </div>
