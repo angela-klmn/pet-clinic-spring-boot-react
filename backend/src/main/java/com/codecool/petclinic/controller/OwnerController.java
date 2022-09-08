@@ -32,6 +32,13 @@ public class OwnerController {
         return owner;
     }
 
+    @GetMapping("/owners/search/{name}")
+    public List<Owner> getOwnerByName(@PathVariable String name) {
+         List<Owner> owners = ownerService.getOwnersByName(name);
+        return owners;
+    }
+
+
     @DeleteMapping("/owners/{id}")
     public void deleteOwner(@PathVariable Long id) {
         ownerService.deleteOwner(id);

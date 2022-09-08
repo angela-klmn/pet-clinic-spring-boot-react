@@ -6,9 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import OwnerDetails from './components/OwnerDetails';
 import AddNewUser from './components/AddNewUser';
 import AddNewPet from './components/AddNewPet';
-
 import NavigationBar from "./components/NavigationBar";
-
 import NotFound from './components/NotFound';
 import Home from './components/Home';
 import Footer from './components/Footer';
@@ -20,6 +18,7 @@ function App() {
   let navigate = useNavigate();
 
   const [owners, fetchOwners] = useState([])
+  const [searchedOwner, fetchSearchedOwner] = useState([])
 
   const getOwners = () => {
     apiGet('http://localhost:8080/owners').then(result => fetchOwners(result))
@@ -41,6 +40,13 @@ const handelAddNewUser = (newUser) => {
     apiPost("http://localhost:8080/pets/add/"+ ownerId, newPet).then(navigate("/owners/"+ownerId))
   }
 
+  const searchOwnerByName = async (name) => {
+    apiGet("http://localhost:8080/owners/search/" + name).then(result => fetchSearchedOwner(result))
+        .then(navigate("/owners/search/"+name))
+}
+
+
+
 
   useEffect(() => {
     getOwners()
@@ -51,7 +57,7 @@ const handelAddNewUser = (newUser) => {
   return (
     <div className='container'>
         <Header />
-        <NavigationBar /> 
+        <NavigationBar searchOwnerByName={searchOwnerByName} />
 
           <Routes>
             <Route path="*" element={<NotFound />} />
@@ -62,7 +68,10 @@ const handelAddNewUser = (newUser) => {
                 <Route path=":ownerId" element={<OwnerDetails  
                     handleUpdateUser={handelUpdateUser}/>} />
                 <Route path="add" element={<AddNewUser handelAddNewUser={handelAddNewUser}/> } />
-                
+                <Route path="search/:name" element={<ListAllOwners owners={searchedOwner}
+                                                                        handleDelete={handleDelete}
+                                                                        handleGetDetails={handleGetDetails}/> } />
+
             </Route>
             <Route path="pets/add/:ownerId" element={<AddNewPet handelAddNewPet={handelAddNewPet}/> } />
 

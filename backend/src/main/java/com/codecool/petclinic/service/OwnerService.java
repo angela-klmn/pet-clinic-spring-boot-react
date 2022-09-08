@@ -55,4 +55,8 @@ public class OwnerService {
         jpaOwnerRepository.deleteById(id);
     }
 
+    public List<Owner> getOwnersByName(String name) {
+        List<Owner> owners = jpaOwnerRepository.findOwnerByFirstOrLastName(name);
+        return owners;
+    }
 }
