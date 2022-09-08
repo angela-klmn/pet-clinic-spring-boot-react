@@ -4,18 +4,13 @@ import com.codecool.petclinic.model.Owner;
 import com.codecool.petclinic.model.Pet;
 import com.codecool.petclinic.repository.JpaOwnerRepository;
 import com.codecool.petclinic.repository.JpaPetRepository;
-import com.codecool.petclinic.repository.OwnerDao;
-import com.codecool.petclinic.repository.PetDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class PetService {
-//    private PetDao petDao;
-//    private OwnerDao ownerDao;
     private JpaOwnerRepository jpaOwnerRepository;
     private JpaPetRepository jpaPetRepository;
 
@@ -28,6 +23,11 @@ public class PetService {
 
     public List<Pet> getAllPets() {
         List<Pet> pets = jpaPetRepository.findAll();
+        return pets;
+    }
+
+    public List<Pet> getPetsByOwnerId(Long ownerId) {
+        List<Pet> pets = jpaPetRepository.getPetsByOwnerId(ownerId);
         return pets;
     }
 
