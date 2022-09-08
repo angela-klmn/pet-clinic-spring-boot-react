@@ -30,6 +30,14 @@ public class PetController {
         return pets;
     }
 
+    @GetMapping("/pets/owner/{ownerId}")
+    public List<Pet> listAllPetsByOwnerId(@PathVariable Long ownerId) {
+        List<Pet> pets =  petService.getPetsByOwnerId(ownerId);
+        System.out.println("im in list all pets by owner id");
+        System.out.println(pets);
+        return pets;
+    }
+
     @GetMapping("/pets/{id}")
     public Pet getPet(@PathVariable Long id) {
         Pet pet = petService.getPetById(id);
@@ -46,11 +54,11 @@ public class PetController {
     }
 
     @PostMapping(value = "/pets/add/{ownerId}")
-    public String addPet(@RequestBody Pet petToAdd, @PathVariable Long ownerId) {
+    public void addPet(@RequestBody Pet petToAdd, @PathVariable Long ownerId) {
+        System.out.println("HELLO ADD PET TO OWNER");
         petService.addPet(petToAdd, ownerId);
         System.out.println("controller add pet");
-        return petToAdd.toString();
-
+        System.out.println(petToAdd);
     }
 
     @PutMapping(value = "/pets/update/{id}")
