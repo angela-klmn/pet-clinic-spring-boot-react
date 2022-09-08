@@ -1,13 +1,16 @@
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Image from 'react-bootstrap/Image';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import {useState} from "react";
 // import logo from '../../src/images/logo.jpg'
 
-const NavigationBar = () => {
+const NavigationBar = ({searchOwnerByName}) => {
+
+    const [search, setSearch] = useState('');
+
     return (
 
         <Navbar bg="light" expand="lg" sticky="top">
@@ -35,14 +38,15 @@ const NavigationBar = () => {
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Form className="d-flex">
+                    <Form onSubmit={(e) => {e.preventDefault(); searchOwnerByName(search)}} className="d-flex">
                         <Form.Control
+                            onChange={(e) => setSearch(e.target.value)}
                             type="search"
                             placeholder="Search"
                             className="me-2"
                             aria-label="Search"
                         />
-                        <Button variant="outline-success">Search</Button>
+                        <Button  type="submit" variant="outline-success">Search</Button>
                     </Form>
                 </Navbar.Collapse>
             </Container>
