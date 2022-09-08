@@ -5,9 +5,12 @@ import { Link, useParams } from 'react-router-dom'
 import {apiGet} from '../dataHandler'
 import Table from 'react-bootstrap/Table';
 
-const PetDetails = ({ handleUpdateUser, handleDeleteVisit}) => {
+
+const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => {
     let {petId} = useParams();
+
     console.log("pet id: " + petId)
+    
 
     const [openUpdate, setOpenUpdate] = useState(false)
     const [pet, setPet] = useState({empty: true})
@@ -21,7 +24,8 @@ const PetDetails = ({ handleUpdateUser, handleDeleteVisit}) => {
       async function fetchData() {
         const resultPet = await apiGet('http://localhost:8080/pets/' + petId);
         const resultVisits = await apiGet('http://localhost:8080/visits/pet/' + petId);
-        console.log(resultPet)
+        console.log("pet: " + resultPet)
+        console.log("pet: " + resultPet.name)
         console.log(resultVisits)
   
         // 👇️ only update state if component is mounted
@@ -59,6 +63,7 @@ const PetDetails = ({ handleUpdateUser, handleDeleteVisit}) => {
 
     <div>
     <button className='btn btn-outline-secondary' onClick={() => setOpenUpdate(true)}>Update Pet</button><br/><br/>
+    <button className='btn btn-outline-secondary' onClick={() => handleDeletePet(petId, pet.ownerId)}>Delete Pet</button><br/><br/>
             <Link to={`/visits/add/${pet.id}`}><button className='btn btn-outline-secondary'>Add new visit</button></Link>
             <br/><br/>
     </div>

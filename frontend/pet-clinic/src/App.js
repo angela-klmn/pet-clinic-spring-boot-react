@@ -76,15 +76,17 @@ const handelAddNewUser = (newUser) => {
                 <Route index element={<ListAllOwners owners={owners} 
                     handleDelete={handleDelete} />} />
                 <Route path=":ownerId" element={<OwnerDetails  
-                    handleUpdateUser={handelUpdateUser}/>} />
+                    handleUpdateUser={handelUpdateUser} handleDelete={handleDelete}/>} />
                 <Route path="add" element={<AddNewUser handelAddNewUser={handelAddNewUser}/> } />
                 <Route path="search/:name" element={<ListAllOwners owners={searchedOwner}
                                                                         handleDelete={handleDelete}/> } />
 
             </Route>
             <Route path="pets/add/:ownerId" element={<AddNewPet handelAddNewPet={handelAddNewPet}/> } />
-            <Route path="pets/:petId" element={<PetDetails handleDeleteVisit={handleDeleteVisit}/> } />
+
+            <Route path="pets/:petId" element={<PetDetails handleDeleteVisit={handleDeleteVisit handleDeletePet={handleDeletePet}}/> } />
             <Route path="visits/add/:petId" element={<AddNewVisit handleAddNewVisit={handleAddNewVisit}/>} />
+
 
             {/* <Route path="pets/:ownerId" element={<AllPetsOfOwner/>} />
             <Route path="pets/add/:ownerId" element={<AllPetsOfOwner/>} />
