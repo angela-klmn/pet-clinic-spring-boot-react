@@ -19,12 +19,12 @@ public class VisitController {
         this.visitService = visitService;
     }
 
-    @GetMapping("/visits/{pet-id}")
+    @GetMapping("/visits/pet/{pet-id}")
     public List<Visit> getVisitsByPetId(@PathVariable("pet-id") Long petId) {
         return visitService.getVisitsByPetId(petId);
     }
 
-    @PostMapping("/visits/{pet-id}/add")
+    @PostMapping("/visits/add/{pet-id}")
     public void addVisit(@RequestBody Visit visit, @PathVariable("pet-id") Long petId) {
         visitService.addVisit(visit, petId);
     }

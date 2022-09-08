@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import {apiGet} from '../dataHandler'
 import PetCard from './PetCard';
 
-const OwnerDetails = ({ handleUpdateUser, handleAddNewPet}) => {
+const OwnerDetails = ({ handleUpdateUser}) => {
     let { ownerId } = useParams();
     console.log("owner id: " + ownerId)
 
