@@ -30,8 +30,12 @@ function App() {
     apiDelete('http://localhost:8080/owners/' + ownerId).then(getOwners).then(navigate("/owners"));
   }
 
-  const handleDeleteVisit = (visitId, petId) => {
+  const handleDeleteVisit = (visitId) => {
     apiDelete('http://localhost:8080/visits/delete/' + visitId).then(navigate(0))
+  }
+
+  const handleDeletePet = (petId) => {
+    apiDelete('http://localhost:8080/pets/' + petId).then(getOwners).then(navigate(-1));
   }
 
 const handelAddNewUser = (newUser) => {
@@ -84,7 +88,7 @@ const handelAddNewUser = (newUser) => {
             </Route>
             <Route path="pets/add/:ownerId" element={<AddNewPet handelAddNewPet={handelAddNewPet}/> } />
 
-            <Route path="pets/:petId" element={<PetDetails handleDeleteVisit={handleDeleteVisit handleDeletePet={handleDeletePet}}/> } />
+            <Route path="pets/:petId" element={<PetDetails handleDeleteVisit={handleDeleteVisit} handleDeletePet={handleDeletePet}/>} />
             <Route path="visits/add/:petId" element={<AddNewVisit handleAddNewVisit={handleAddNewVisit}/>} />
 
 
