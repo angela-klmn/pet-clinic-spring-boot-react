@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import OwnerDetails from './components/OwnerDetails';
 import AddNewUser from './components/AddNewUser';
 import AddNewPet from './components/AddNewPet';
+import PetDetails from './components/PetDetails';
 import NavigationBar from "./components/NavigationBar";
 import NotFound from './components/NotFound';
 import Home from './components/Home';
@@ -69,11 +70,11 @@ const handelAddNewUser = (newUser) => {
                     handleUpdateUser={handelUpdateUser}/>} />
                 <Route path="add" element={<AddNewUser handelAddNewUser={handelAddNewUser}/> } />
                 <Route path="search/:name" element={<ListAllOwners owners={searchedOwner}
-                                                                        handleDelete={handleDelete}
-                                                                        handleGetDetails={handleGetDetails}/> } />
+                                                                        handleDelete={handleDelete}/> } />
 
             </Route>
             <Route path="pets/add/:ownerId" element={<AddNewPet handelAddNewPet={handelAddNewPet}/> } />
+            <Route path="pets/:petId" element={<PetDetails/> } />
 
             {/* <Route path="pets/:ownerId" element={<AllPetsOfOwner/>} />
             <Route path="pets/add/:ownerId" element={<AllPetsOfOwner/>} />
