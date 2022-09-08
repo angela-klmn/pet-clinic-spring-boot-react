@@ -51,7 +51,6 @@ public class OwnerController {
     @PostMapping(value = "/owners/add")
     public void addOwner(@RequestBody Owner ownerToAdd) {
         ownerService.addOwner(ownerToAdd);
-
     }
 
     @PutMapping(value = "/owners/update/{id}")

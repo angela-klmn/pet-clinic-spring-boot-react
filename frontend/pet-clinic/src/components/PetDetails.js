@@ -5,8 +5,10 @@ import { Link, useParams } from 'react-router-dom'
 import {apiGet} from '../dataHandler'
 import Table from 'react-bootstrap/Table';
 
-const PetDetails = ({ handleUpdateUser, handleDeletePet}) => {
-    let { petId} = useParams();
+
+const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => {
+    let {petId} = useParams();
+
     console.log("pet id: " + petId)
     
 
@@ -84,16 +86,6 @@ const PetDetails = ({ handleUpdateUser, handleDeletePet}) => {
     <div>
     <h1>Visits of the pet:</h1><br/>
 
-{/* 
-        <div className='flexcontainer'>
-        {visits.map(pet => {
-        return (
-          <div key={pet.id}>
-            <PetCard pet={pet} />
-          </div>
-        );
-      })}
-        </div> */}
 
 <Table striped bordered hover>
       <thead>
@@ -113,10 +105,7 @@ const PetDetails = ({ handleUpdateUser, handleDeletePet}) => {
               <td>{visit.description}</td>
               <td>{visit.treatmentType}</td>
               <td>{visit.price}</td>
-              {/* <td>
-                <Link to={`/owners/${owner.id}`}><button className="btn btn-outline-secondary">Details</button> </Link>
-              </td> */}
-              {/* <td><button className="btn btn-outline-secondary" onClick={() => handleDelete(visit.id)}>Delete</button>  </td> */}
+              <td><button className="btn btn-outline-secondary" onClick={() => handleDeleteVisit(visit.id, petId)}>Delete</button>  </td>
             </tr>
           )
         })}

@@ -29,4 +29,9 @@ public class VisitController {
         visitService.addVisit(visit, petId);
     }
 
+    @DeleteMapping("/visits/delete/{visit-id}")
+    public void deleteVisit(@PathVariable("visit-id") Long visitId) {
+        visitService.deleteVisit(visitId);
+    }
+
 }
