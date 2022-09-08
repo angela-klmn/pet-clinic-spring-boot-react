@@ -6,6 +6,7 @@ import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -29,7 +30,7 @@ public class Pet {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "pet"
     )
-    private Set<Visit> visits;
+    private Set<Visit> visits= new HashSet<>();
 
 
 
@@ -91,8 +92,12 @@ public class Pet {
 //    }
 
     public void addVisit(Visit visit) {
-        visits.add(visit);
+        if (!this.visits.contains(visit)) {
+            this.visits.add(visit);
+            visit.setPet(this);
+        }
     }
+
 
     @Override
     public String toString() {
