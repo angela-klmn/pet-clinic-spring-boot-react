@@ -12,6 +12,7 @@ import NotFound from './components/NotFound';
 import Home from './components/Home';
 import Footer from './components/Footer';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import AddNewVisit from "./components/AddNewVisit";
 
 
 function App() {
@@ -29,6 +30,10 @@ function App() {
     apiDelete('http://localhost:8080/owners/' + ownerId).then(getOwners).then(navigate("/owners"));
   }
 
+  const handleDeleteVisit = (visitId, petId) => {
+    apiDelete('http://localhost:8080/visits/delete/' + visitId).then(navigate(0))
+  }
+
 const handelAddNewUser = (newUser) => {
   apiPost("http://localhost:8080/owners/add", newUser).then(getOwners).then(navigate("/owners"))
 }
@@ -38,7 +43,11 @@ const handelAddNewUser = (newUser) => {
   }
 
   const handelAddNewPet = (newPet, ownerId) => {
-    apiPost("http://localhost:8080/pets/add/"+ ownerId, newPet).then(navigate("/owners/"+ownerId))
+    apiPost("http://localhost:8080/pets/add/"+ ownerId, newPet).then(navigate(-1).then(navigate(0)))
+  }
+
+  const handleAddNewVisit = (newVisit, petId) => {
+    apiPost("http://localhost:8080/visits/add/"+ petId, newVisit).then(navigate(-1))
   }
 
   const searchOwnerByName = async (name) => {
@@ -74,7 +83,8 @@ const handelAddNewUser = (newUser) => {
 
             </Route>
             <Route path="pets/add/:ownerId" element={<AddNewPet handelAddNewPet={handelAddNewPet}/> } />
-            <Route path="pets/:petId" element={<PetDetails/> } />
+            <Route path="pets/:petId" element={<PetDetails handleDeleteVisit={handleDeleteVisit}/> } />
+            <Route path="visits/add/:petId" element={<AddNewVisit handleAddNewVisit={handleAddNewVisit}/>} />
 
             {/* <Route path="pets/:ownerId" element={<AllPetsOfOwner/>} />
             <Route path="pets/add/:ownerId" element={<AllPetsOfOwner/>} />

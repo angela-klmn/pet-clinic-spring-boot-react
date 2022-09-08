@@ -35,7 +35,7 @@ const AddNewPet = ({handelAddNewPet}) => {
         <br/>
         <h1>Add new Pet: </h1><br/>
 
-        <form onSubmit={() => addNewPet()} className="form">
+        <form onSubmit={(e) => {e.preventDefault(); addNewPet()}} className="form">
         
             <label>Name: </label><br />
             <input type="text" required value={name} onChange={(e) => {setName(e.target.value)}}  /><br />
