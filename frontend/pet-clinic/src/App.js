@@ -5,18 +5,18 @@ import {apiGet, apiDelete, apiPost, apiPut} from './dataHandler'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OwnerDetails from './components/OwnerDetails';
 import AddNewUser from './components/AddNewUser';
-
 import NavigationBar from "./components/NavigationBar";
-
 import NotFound from './components/NotFound';
 import Home from './components/Home';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import {Route, Routes, useNavigate} from 'react-router-dom';
 
 
 function App() {
 
+  const navigate = useNavigate();
   const [owners, fetchOwners] = useState([])
   const [owner, fetchOwner] = useState({empty: true})
+  const [searchedOwner, fetchSearchedOwner] = useState([])
 
   const getOwners = () => {
     apiGet('http://localhost:8080/owners').then(result => fetchOwners(result))
@@ -47,6 +47,13 @@ const handelAddNewUser = (newUser) => {
 
   }
 
+  const searchOwnerByName = async (name) => {
+    apiGet("http://localhost:8080/owners/search/" + name).then(result => fetchSearchedOwner(result))
+        .then(navigate("/owners/search/"+name))
+}
+
+
+
 
   useEffect(() => {
     getOwners()
@@ -57,7 +64,7 @@ const handelAddNewUser = (newUser) => {
   return (
     <div className='container'>
         <Header />
-        <NavigationBar /> 
+        <NavigationBar searchOwnerByName={searchOwnerByName} />
 
           <Routes>
             <Route path="*" element={<NotFound />} />
@@ -70,6 +77,9 @@ const handelAddNewUser = (newUser) => {
                     handleCloseDetails={handleCloseDetails} 
                     handleUpdateUser={handelUpdateUser}/>} />
                 <Route path="add" element={<AddNewUser handelAddNewUser={handelAddNewUser}/> } />
+                <Route path="search/:name" element={<ListAllOwners owners={searchedOwner}
+                                                                        handleDelete={handleDelete}
+                                                                        handleGetDetails={handleGetDetails}/> } />
             </Route>
 
             {/* <Route path="pets/:ownerId" element={<AllPetsOfOwner/>} />
