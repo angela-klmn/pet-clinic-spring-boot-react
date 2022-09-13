@@ -35,10 +35,14 @@ public class PetclinicApplication {
 
 			Visit visit1 = new Visit(TreatmentType.VACCINATION, "Veszettség elleni oltas.", 20);
 			Visit visit2 = new Visit(TreatmentType.DENTAL_TREATMENT, "Foghuzas", 30);
-			Visit visit3 = new Visit(TreatmentType.CONSULTATION, "Consultation", 10);
+			Visit visit3 = new Visit(TreatmentType.SURGERY, "Foghuzas", 30);
+			Visit visit4 = new Visit(TreatmentType.DENTAL_TREATMENT, "Foghuzas", 30);
+			Visit visit5 = new Visit(TreatmentType.CONSULTATION, "Consultation", 10);
 
 			pet1.addVisit(visit1);
 			pet1.addVisit(visit2);
+			pet1.addVisit(visit4);
+			pet1.addVisit(visit5);
 			pet3.addVisit(visit3);
 
 			owner1.addPet(pet1);
