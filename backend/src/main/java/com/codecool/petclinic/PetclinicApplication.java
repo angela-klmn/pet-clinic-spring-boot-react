@@ -1,17 +1,18 @@
 package com.codecool.petclinic;
 
-import com.codecool.petclinic.model.Owner;
-import com.codecool.petclinic.model.Pet;
-import com.codecool.petclinic.model.Visit;
+import com.codecool.petclinic.model.*;
 import com.codecool.petclinic.model.types.PetType;
 import com.codecool.petclinic.model.types.TreatmentType;
 import com.codecool.petclinic.repository.JpaOwnerRepository;
+import com.codecool.petclinic.repository.UserRepo;
+import com.codecool.petclinic.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @SpringBootApplication
 public class PetclinicApplication {
@@ -21,7 +22,7 @@ public class PetclinicApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(JpaOwnerRepository jpaOwnerRepository) {
+	CommandLineRunner commandLineRunner(JpaOwnerRepository jpaOwnerRepository, UserRepo userRepo, UserService userService) {
 		return args -> {
 			Owner owner1 = new Owner("John", "Lennon", "john@lennon.com", "+66 666 66 66");
 			Owner owner2 = new Owner("Mariah", "Carey", "mary@cary.com", "+36 70 333 888");
@@ -50,10 +51,35 @@ public class PetclinicApplication {
 			owner2.addPet(pet4);
 			owner3.addPet(pet3);
 
+
+
 			jpaOwnerRepository.save(owner1);
 			jpaOwnerRepository.save(owner2);
 			jpaOwnerRepository.save(owner3);
 			jpaOwnerRepository.save(owner4);
+
+//			AppUser user1 = new AppUser();
+//			user1.setName("user1");
+//			user1.setPassword("password1");
+//			user1.setUsername("username1");
+			//userRepo.save(user1);
+
+			userService.saveUser(new AppUser(null, "Angi Doktor", "angi", "password", new ArrayList<>()));
+			userService.saveUser(new AppUser(null, "Kristof Doktor", "kristof", "password", new ArrayList<>()));
+			userService.saveUser(new AppUser(null, "Domi Doktor", "domi", "password", new ArrayList<>()));
+			userService.saveUser(new AppUser(null, "John Lennon", "john", "password", new ArrayList<>()));
+			userService.saveUser(new AppUser(null, "Tina Turner", "tina", "password", new ArrayList<>()));
+
+			userService.saveRole(new Role(null, "ROLE_CLIENT"));
+			userService.saveRole(new Role(null, "ROLE_EMPLOYEE"));
+
+			userService.addRoleToUser("john", "ROLE_CLIENT");
+			userService.addRoleToUser("tina", "ROLE_CLIENT");
+			userService.addRoleToUser("domi", "ROLE_EMPLOYEE");
+			userService.addRoleToUser("kristof", "ROLE_EMPLOYEE");
+			userService.addRoleToUser("angi", "ROLE_EMPLOYEE");
+
+
 		};
 	}
 
