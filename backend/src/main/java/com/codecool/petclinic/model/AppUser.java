@@ -14,7 +14,8 @@ import static javax.persistence.GenerationType.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+//@Table(name = "app_user")
+public class AppUser {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
