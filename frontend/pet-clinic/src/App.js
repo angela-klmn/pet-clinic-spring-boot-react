@@ -13,9 +13,11 @@ import Home from './components/Home';
 import Footer from './components/Footer';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import AddNewVisit from "./components/AddNewVisit";
+import Login from "./components/Login/Login";
 
 
 function App() {
+
 
   let navigate = useNavigate();
 
@@ -76,6 +78,7 @@ const handelAddNewUser = (newUser) => {
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/owners">
                 <Route index element={<ListAllOwners owners={owners} 
                     handleDelete={handleDelete} />} />
