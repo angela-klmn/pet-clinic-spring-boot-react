@@ -9,15 +9,34 @@ export async function apiGet(url) {
     }   
 }
 
+
 export async function apiPost(url, payload) {
     try {
         const resp = await axios.post(url, payload);
         console.log(resp.data);
     } catch (err) {
-        // Handle Error Here
         console.error(err);
     }
+}
 
+
+export async function apiDelete(url) {
+    try {
+        const resp = await axios.delete(url)
+        console.log(resp.data);
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+
+export async function apiPut(url, payload) {
+    try {
+        const resp = await axios.put(url, payload);
+        console.log(resp.data);
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 // export async function apiGet(url) {
@@ -39,18 +58,18 @@ export async function apiPost(url, payload) {
 //     });
 // }
 
-export async function apiDelete(url) {
-    let response = await fetch(url, {
-        method: "DELETE",
-        headers: {'Content-type': 'application/json'}
-    });
-}
+// export async function apiDelete(url) {
+//     let response = await fetch(url, {
+//         method: "DELETE",
+//         headers: {'Content-type': 'application/json'}
+//     });
+// }
 
-export async function apiPut(url, payload) {
-    let response = await fetch(url, {
-        method: "PUT",
-        headers: {"Content-type": "application/json"},
-        body: JSON.stringify(payload)
-    })
-}
+// export async function apiPut(url, payload) {
+//     let response = await fetch(url, {
+//         method: "PUT",
+//         headers: {"Content-type": "application/json"},
+//         body: JSON.stringify(payload)
+//     })
+// }
 
