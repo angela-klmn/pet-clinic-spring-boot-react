@@ -1,14 +1,27 @@
-import { useRef } from "react";
+import axios from 'axios'
 
 export async function apiGet(url) {
-    let response = await fetch(url, {
-        method: "GET",
-    });
-    if (response.status === 200) {
-        let data = response.json();
-        return await data;
+    let data;
+    try {
+        const response = await axios.get(url);
+        return await response.data;
+    
+    } catch (err) {
+        
+        console.error(err);
     }
+    
 }
+
+// export async function apiGet(url) {
+//     let response = await fetch(url, {
+//         method: "GET",
+//     });
+//     if (response.status === 200) {
+//         let data = response.json();
+//         return await data;
+//     }
+// }
 
 
 export async function apiPost(url, payload) {
