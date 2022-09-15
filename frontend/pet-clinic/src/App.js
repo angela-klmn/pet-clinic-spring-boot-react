@@ -61,6 +61,10 @@ const handelAddNewUser = (newUser) => {
         .then(navigate("/owners/search/"+name))
 }
 
+const handleLogin = (someLoginSomething) => {
+  //todo
+}
+
 
 
 
@@ -78,7 +82,7 @@ const handelAddNewUser = (newUser) => {
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" handleLogin={handleLogin} element={<Login />} />
             <Route path="/owners">
                 <Route index element={<ListAllOwners owners={owners} 
                     handleDelete={handleDelete} />} />
