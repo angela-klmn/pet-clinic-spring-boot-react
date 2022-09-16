@@ -2,24 +2,28 @@
 import image from '../../images/dog_and_cat_2.jpg';
 import './login.css';
 
-import {useParams} from "react-router-dom";
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect } from "react";
+import useAuth from '../../hooks/useAuth';
+import { Link, useNavigate, useLocation } from "react-router-dom"
 
-import AuthContext from "../../context/AuthProvider"
 
 import axios from 'axios';
 const LOGIN_URL = 'http://localhost:8080/api/login';
 
 
-const Login = ({handleLogin}) => {
-    const { setAuth } = useContext(AuthContext);
+const Login = () => {
+    const { setAuth } = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
     const userRef = useRef();
     const errRef = useRef();
 
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
+    //const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         userRef.current.focus();
@@ -52,10 +56,11 @@ const Login = ({handleLogin}) => {
             setAuth({ user, password, roles, accessToken });
             setUser('');
             setPassword('');
-            setSuccess(true);
+            //setSuccess(true);
+            navigate(from, { replace: true });
             console.log("username: " + user)
             console.log("password: " + password)
-            console.log(success)
+            //console.log(success)
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -75,16 +80,16 @@ const Login = ({handleLogin}) => {
 
 
     return (
-        <>
-         {success ? (
-                <section>
-                    <h1>You are logged in!</h1>
-                    <br />
-                    <p>
-                        <a href="#">Go to Home</a>
-                    </p>
-                </section>
-            ) : (
+        // <>
+        //  {success ? (
+        //         <section>
+        //             <h1>You are logged in!</h1>
+        //             <br />
+        //             <p>
+        //                 <a href="#">Go to Home</a>
+        //             </p>
+        //         </section>
+        //     ) : (
         <div className="wrapper">
             <div id="formContent">
             <p ref={errRef} className={errMsg ? "error" : "offscreen"} aria-live="assertive">{errMsg}<br></br></p>
@@ -137,8 +142,8 @@ const Login = ({handleLogin}) => {
         </div> */}
             </div>
         </div>
-            )
-    }</>
+            // )
+    // }</>
     );
 };
 

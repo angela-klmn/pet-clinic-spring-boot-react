@@ -14,9 +14,17 @@ import Footer from './components/Footer';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import AddNewVisit from "./components/visit/AddNewVisit";
 import Login from "./components/Login/Login";
+import Unauthorized from "./components/Unauthorized";
+import RequireAuth from './components/RequireAuth';
 
 
 function App() {
+
+  const ROLES = {
+    'Client': "ROLE_CLIENT",
+    'Employee': "ROLE_EMPLOYEE",
+
+  }
 
 
   let navigate = useNavigate();
@@ -81,23 +89,29 @@ const handleLogin = (someLoginSomething) => {
 
           <Routes>
             <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<Home />} />
             <Route path="/login" handleLogin={handleLogin} element={<Login />} />
-            <Route path="/owners">
-                <Route index element={<ListAllOwners owners={owners} 
-                    handleDelete={handleDelete} />} />
-                <Route path=":ownerId" element={<OwnerDetails  
-                    handleUpdateUser={handelUpdateUser} handleDelete={handleDelete}/>} />
-                <Route path="add" element={<AddNewUser handelAddNewUser={handelAddNewUser}/> } />
-                <Route path="search/:name" element={<ListAllOwners owners={searchedOwner}
-                                                                        handleDelete={handleDelete}/> } />
+            <Route path="/unauthorized" element={<Unauthorized />} />
+            
+
+
+            {/* we want to protect these routes */}
+            <Route element={<RequireAuth allowedRoles={[ROLES.Employee]} />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/owners">
+                      <Route index element={<ListAllOwners owners={owners} 
+                          handleDelete={handleDelete} />} />
+                      <Route path=":ownerId" element={<OwnerDetails  
+                          handleUpdateUser={handelUpdateUser} handleDelete={handleDelete}/>} />
+                      <Route path="add" element={<AddNewUser handelAddNewUser={handelAddNewUser}/> } />
+                      <Route path="search/:name" element={<ListAllOwners owners={searchedOwner}
+                                                                              handleDelete={handleDelete}/> } />
+                </Route>
+
+                <Route path="pets/add/:ownerId" element={<AddNewPet handelAddNewPet={handelAddNewPet}/> } />
+                <Route path="pets/:petId" element={<PetDetails handleDeleteVisit={handleDeleteVisit} handleDeletePet={handleDeletePet}/>} />
+                <Route path="visits/add/:petId" element={<AddNewVisit handleAddNewVisit={handleAddNewVisit}/>} />
 
             </Route>
-            <Route path="pets/add/:ownerId" element={<AddNewPet handelAddNewPet={handelAddNewPet}/> } />
-
-            <Route path="pets/:petId" element={<PetDetails handleDeleteVisit={handleDeleteVisit} handleDeletePet={handleDeletePet}/>} />
-            <Route path="visits/add/:petId" element={<AddNewVisit handleAddNewVisit={handleAddNewVisit}/>} />
-
 
             {/* <Route path="pets/:ownerId" element={<AllPetsOfOwner/>} />
             <Route path="pets/add/:ownerId" element={<AllPetsOfOwner/>} />
