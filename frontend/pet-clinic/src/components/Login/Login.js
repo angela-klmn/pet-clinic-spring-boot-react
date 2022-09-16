@@ -46,8 +46,9 @@ const Login = ({handleLogin}) => {
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
             const accessToken = response?.data?.access_token;
-            const roles = response?.data?.roles;
+            const roles = response?.data?.role;
             console.log("acc token: " + accessToken)
+            console.log("role: " + roles)
             setAuth({ user, password, roles, accessToken });
             setUser('');
             setPassword('');
@@ -62,10 +63,12 @@ const Login = ({handleLogin}) => {
                 setErrMsg('Missing Username or Password');
             } else if (err.response?.status === 401) {
                 setErrMsg('Unauthorized');
+            } else if (err.response?.status === 403) {
+                setErrMsg('Incorrect username or password');
             } else {
                 setErrMsg('Login Failed');
             }
-            //errRef.current.focus();
+            errRef.current.focus();
         }
     }
 
@@ -84,6 +87,7 @@ const Login = ({handleLogin}) => {
             ) : (
         <div className="wrapper">
             <div id="formContent">
+            <p ref={errRef} className={errMsg ? "error" : "offscreen"} aria-live="assertive">{errMsg}<br></br></p>
                 {/* <!-- Tabs Titles --> */}
                 <h2 className="title"> Client Management System </h2>
 

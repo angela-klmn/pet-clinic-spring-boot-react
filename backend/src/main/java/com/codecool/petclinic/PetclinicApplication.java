@@ -82,11 +82,11 @@ public class PetclinicApplication {
 //			user1.setUsername("username1");
 			//userRepo.save(user1);
 
-			userService.saveUser(new AppUser(null, "Angi Doktor", "angi", "password", new ArrayList<>()));
-			userService.saveUser(new AppUser(null, "Kristof Doktor", "kristof", "password", new ArrayList<>()));
-			userService.saveUser(new AppUser(null, "Domi Doktor", "domi", "password", new ArrayList<>()));
-			userService.saveUser(new AppUser(null, "John Lennon", "john", "password", new ArrayList<>()));
-			userService.saveUser(new AppUser(null, "Tina Turner", "tina", "password", new ArrayList<>()));
+			userService.saveUser(new AppUser(null, "Angi Doktor", "angi", "aaaa", new ArrayList<>()));
+			userService.saveUser(new AppUser(null, "Kristof Doktor", "kristof", "aaaa", new ArrayList<>()));
+			userService.saveUser(new AppUser(null, "Domi Doktor", "domi", "aaaa", new ArrayList<>()));
+			userService.saveUser(new AppUser(null, "John Lennon", "john", "aaaa", new ArrayList<>()));
+			userService.saveUser(new AppUser(null, "Tina Turner", "tina", "aaaa", new ArrayList<>()));
 
 			userService.saveRole(new Role(null, "ROLE_CLIENT"));
 			userService.saveRole(new Role(null, "ROLE_EMPLOYEE"));
