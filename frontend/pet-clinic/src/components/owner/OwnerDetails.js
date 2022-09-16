@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import myImage from '../../src/images/dog_and_cat_2.jpg'
+import myImage from '../../../src/images/dog_and_cat_2.jpg'
 import UpdateUser from "./UpdateUser";
 import { Link, useParams } from 'react-router-dom'
-import {apiGet} from '../dataHandler'
-import PetCard from './PetCard';
+import {apiGet} from '../../dataHandler'
+import PetCard from '../pet/PetCard';
 
 const OwnerDetails = ({ handleUpdateUser, handleDelete}) => {
     let { ownerId } = useParams();

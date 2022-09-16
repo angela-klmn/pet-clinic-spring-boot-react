@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import myImage from '../../src/images/cat_1.jpg'
+import myImage from '../../../src/images/cat_1.jpg'
 
 const AddNewPet = ({handelAddNewPet}) => {
 

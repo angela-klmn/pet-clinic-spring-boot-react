@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import ListAllOwners from './components/ListAllOwners'
+import ListAllOwners from './components/owner/ListAllOwners'
 import Header from './components/Header'
 import {apiGet, apiDelete, apiPost, apiPut} from './dataHandler'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import OwnerDetails from './components/OwnerDetails';
-import AddNewUser from './components/AddNewUser';
-import AddNewPet from './components/AddNewPet';
-import PetDetails from './components/PetDetails';
+import OwnerDetails from './components/owner/OwnerDetails';
+import AddNewUser from './components/owner/AddNewUser';
+import AddNewPet from './components/pet/AddNewPet';
+import PetDetails from './components/pet/PetDetails';
 import NavigationBar from "./components/NavigationBar";
 import NotFound from './components/NotFound';
 import Home from './components/Home';
 import Footer from './components/Footer';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import AddNewVisit from "./components/AddNewVisit";
+import AddNewVisit from "./components/visit/AddNewVisit";
 import Login from "./components/Login/Login";
 
 

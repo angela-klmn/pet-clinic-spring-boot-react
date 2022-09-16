@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import myImage from '../../src/images/cat_1.jpg'
+import myImage from '../../../src/images/cat_1.jpg'
 
 const AddNewUser = ({handelAddNewUser}) => {
     const [firstName, setFirstName] = useState('')
