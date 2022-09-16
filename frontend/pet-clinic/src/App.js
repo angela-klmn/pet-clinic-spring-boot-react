@@ -16,6 +16,8 @@ import AddNewVisit from "./components/visit/AddNewVisit";
 import Login from "./components/Login/Login";
 import Unauthorized from "./components/Unauthorized";
 import RequireAuth from './components/RequireAuth';
+import ClientPets from './components/forclients/ClientPets';
+import ClientPetDetails from './components/forclients/ClientPetDetails';
 
 
 function App() {
@@ -95,6 +97,7 @@ const handleLogin = (someLoginSomething) => {
 
 
             {/* we want to protect these routes */}
+            {/* Accessible only to EMPLOYEES */}
             <Route element={<RequireAuth allowedRoles={[ROLES.Employee]} />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/owners">
@@ -113,13 +116,15 @@ const handleLogin = (someLoginSomething) => {
 
             </Route>
 
-            {/* <Route path="pets/:ownerId" element={<AllPetsOfOwner/>} />
-            <Route path="pets/add/:ownerId" element={<AllPetsOfOwner/>} />
-            <Route path="pet/:petId" element={<PetDetails/>} />
 
-            <Route path="visit/:visitId" element={<VisitDetails/>} />
-            <Route path="visit/add" element={<AddNewVisit/>} /> */}
+            {/* we want to protect these routes */}
+            {/* Accessible to CLIENTS and EMPLOYEES */}
+            <Route element={<RequireAuth allowedRoles={[ROLES.Employee, ROLES.Client]} />}>
+              <Route path="/client/pets" element={<ClientPets />} />
+              <Route path="/client/pet/:petId" element={<ClientPetDetails />} />
+            </Route>
 
+        
           </Routes>
  
       <hr />

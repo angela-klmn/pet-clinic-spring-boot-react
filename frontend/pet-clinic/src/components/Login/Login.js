@@ -57,7 +57,10 @@ const Login = () => {
             setUser('');
             setPassword('');
             //setSuccess(true);
-            navigate(from, { replace: true });
+            if (roles === "ROLE_CLIENT") {
+                navigate("/client/pets", { replace: true });
+            }
+            else (navigate(from, { replace: true }))
             console.log("username: " + user)
             console.log("password: " + password)
             //console.log(success)
