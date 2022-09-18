@@ -7,16 +7,17 @@ import useAuth from '../../hooks/useAuth';
 import { Link, useNavigate, useLocation } from "react-router-dom"
 
 
-import axios from 'axios';
-const LOGIN_URL = 'http://localhost:8080/api/login';
+import axios from '../../api/axios';
+const LOGIN_URL = '/api/login';
 
 
 const Login = () => {
-    const { setAuth } = useAuth();
+    const { auth, setAuth } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+
     const userRef = useRef();
     const errRef = useRef();
 
@@ -35,6 +36,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         console.log("username: " + user)
         console.log("password: " + password)
 
@@ -50,10 +52,11 @@ const Login = () => {
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
             const accessToken = response?.data?.access_token;
+            const refreshToken = response?.data?.refresh_token;
             const roles = response?.data?.role;
-            console.log("acc token: " + accessToken)
-            console.log("role: " + roles)
-            setAuth({ user, password, roles, accessToken });
+            console.log("acc token: " + accessToken);
+            console.log("role: " + roles);
+            setAuth({ user: user, password: password, roles: roles, accessToken: accessToken, refreshToken: refreshToken });
             setUser('');
             setPassword('');
             //setSuccess(true);
@@ -61,8 +64,8 @@ const Login = () => {
                 navigate("/client/pets", { replace: true });
             }
             else (navigate(from, { replace: true }))
-            console.log("username: " + user)
-            console.log("password: " + password)
+            console.log("auth.user: " + auth.user)
+            console.log("auth.password: " + auth.password)
             //console.log(success)
         } catch (err) {
             if (!err?.response) {

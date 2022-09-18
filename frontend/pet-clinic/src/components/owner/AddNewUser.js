@@ -29,6 +29,8 @@ const AddNewUser = ({handelAddNewUser}) => {
         
         <br/>
         <h1>Add new User: </h1><br/>
+        <Link to={`/`}><button className='btn btn-outline-secondary'>Go to home page</button></Link>
+        <br/>
 
         <form onSubmit={() => addNewUser()} className="form">
         

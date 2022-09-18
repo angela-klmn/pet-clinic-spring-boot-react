@@ -4,9 +4,11 @@ import UpdateUser from "./UpdateUser";
 import { Link, useParams } from 'react-router-dom'
 import {apiGet} from '../../dataHandler'
 import PetCard from '../pet/PetCard';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const OwnerDetails = ({ handleUpdateUser, handleDelete}) => {
     let { ownerId } = useParams();
+    const axiosPrivate = useAxiosPrivate();
     console.log("owner id: " + ownerId)
 
     const [openUpdate, setOpenUpdate] = useState(false)
@@ -19,15 +21,15 @@ const OwnerDetails = ({ handleUpdateUser, handleDelete}) => {
       let isMounted = true;
   
       async function fetchData() {
-        const resultOwner = await apiGet('http://localhost:8080/owners/' + ownerId);
-        const resultPets = await apiGet('http://localhost:8080/pets/owner/' + ownerId);
+        const resultOwner = await axiosPrivate.get('/owners/' + ownerId);
+        const resultPets = await axiosPrivate.get('/pets/owner/' + ownerId);
         console.log(resultOwner)
         console.log(resultPets)
   
         // 👇️ only update state if component is mounted
         if (isMounted) {
-          setOwner(resultOwner);
-          setPets(resultPets)
+          setOwner(resultOwner.data);
+          setPets(resultPets.data);
         }
       }
   
