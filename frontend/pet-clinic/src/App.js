@@ -4,7 +4,7 @@ import Header from './components/Header'
 import {apiGet, apiDelete, apiPost, apiPut} from './dataHandler'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OwnerDetails from './components/owner/OwnerDetails';
-import AddNewUser from './components/owner/AddNewUser';
+import AddNewOwner from './components/owner/AddNewOwner';
 import AddNewPet from './components/pet/AddNewPet';
 import PetDetails from './components/pet/PetDetails';
 import NavigationBar from "./components/NavigationBar";
@@ -45,10 +45,10 @@ function App() {
     apiGet('http://localhost:8080/owners').then(result => fetchOwners(result))
   }
 
-  const handleDelete = (ownerId) => {
-    //apiDelete('http://localhost:8080/owners/' + ownerId).then(getOwners).then(navigate("/owners"));
-    axiosPrivate.delete('/owners/' + ownerId).then(navigate("/owners"));
-  }
+  // const handleDelete = (ownerId) => {
+  //   //apiDelete('http://localhost:8080/owners/' + ownerId).then(getOwners).then(navigate("/owners"));
+  //   axiosPrivate.delete('/owners/' + ownerId).then(navigate("/owners"));
+  // }
 
 //   const getOwners = async () => {
 //     try {
@@ -94,9 +94,6 @@ const handelAddNewUser = (newUser) => {
         .then(navigate("/owners/search/"+name))
 }
 
-const handleLogin = (someLoginSomething) => {
-  //todo
-}
 
 //console.log("In App.js outside functions: " + auth.user)
 
@@ -114,7 +111,7 @@ const handleLogin = (someLoginSomething) => {
 
           <Routes>
             <Route path="*" element={<NotFound />} />
-            <Route path="/login" handleLogin={handleLogin} element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="/users" element={<Users />} />
             <Route path="/logout" element={<Logout />} />
@@ -126,13 +123,11 @@ const handleLogin = (someLoginSomething) => {
               <Route element={<RequireAuth allowedRoles={[ROLES.Employee]} />}>
                   <Route path="/" element={<Home />} />
                   <Route path="/owners">
-                        <Route index element={<ListAllOwners owners={owners} 
-                            handleDelete={handleDelete} />} />
+                        <Route index element={<ListAllOwners />} />
                         <Route path=":ownerId" element={<OwnerDetails  
-                            handleUpdateUser={handelUpdateUser} handleDelete={handleDelete}/>} />
-                        <Route path="add" element={<AddNewUser handelAddNewUser={handelAddNewUser}/> } />
-                        <Route path="search/:name" element={<ListAllOwners owners={searchedOwner}
-                                                                                handleDelete={handleDelete}/> } />
+                            handleUpdateUser={handelUpdateUser} />} />
+                        <Route path="add" element={<AddNewOwner handelAddNewUser={handelAddNewUser}/> } />
+                        <Route path="search/:name" element={<ListAllOwners owners={searchedOwner}/> } />
                   </Route>
 
                   <Route path="pets/add/:ownerId" element={<AddNewPet handelAddNewPet={handelAddNewPet}/> } />

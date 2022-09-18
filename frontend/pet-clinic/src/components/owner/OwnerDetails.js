@@ -1,19 +1,29 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect } from 'react'
 import myImage from '../../../src/images/dog_and_cat_2.jpg'
 import UpdateUser from "./UpdateUser";
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import {apiGet} from '../../dataHandler'
 import PetCard from '../pet/PetCard';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-const OwnerDetails = ({ handleUpdateUser, handleDelete}) => {
+const OwnerDetails = ({ handleUpdateUser}) => {
+  
     let { ownerId } = useParams();
     const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
     console.log("owner id: " + ownerId)
 
     const [openUpdate, setOpenUpdate] = useState(false)
     const [owner, setOwner] = useState({empty: true})
     const [pets, setPets] = useState([])
+
+    const handleDelete = async (ownerId) => {
+      //apiDelete('http://localhost:8080/owners/' + ownerId).then(getOwners).then(navigate("/owners"));
+      
+      const response = await axiosPrivate.delete('/owners/' + ownerId);
+      navigate("/owners");
+      
+    }
 
 
     useEffect(() => {

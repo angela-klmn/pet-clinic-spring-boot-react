@@ -1,21 +1,31 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import myImage from '../../../src/images/cat_1.jpg'
+import { Link, useNavigate } from 'react-router-dom'
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-const AddNewUser = ({handelAddNewUser}) => {
+const AddNewOwner = () => {
+
+    const navigate = useNavigate();
+    const axiosPrivate = useAxiosPrivate();
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
 
     let newUser = {"firstName": "Tina", "lastName": "Turner", "petIds": null, "email": "tina@turner.com" }
 
-    const addNewUser = () => {
+    const addNewOwner = () => {
         newUser.firstName = firstName;
         newUser.lastName = lastName;
         newUser.email = email;
-        handelAddNewUser(newUser);
-    
+        handelAddNewOwner(newUser);
     }
+
+    const handelAddNewOwner = async (newUser) => {
+        //apiPost("http://localhost:8080/owners/add", newUser).then(getOwners).then(navigate("/owners"))
+        const response = await axiosPrivate.post('/owners/add', newUser);
+        navigate("/owners");
+      }
+        
 
   return (
     <div className='flexcontainer'>
@@ -29,10 +39,9 @@ const AddNewUser = ({handelAddNewUser}) => {
         
         <br/>
         <h1>Add new User: </h1><br/>
-        <Link to={`/`}><button className='btn btn-outline-secondary'>Go to home page</button></Link>
         <br/>
 
-        <form onSubmit={() => addNewUser()} className="form">
+        <form onSubmit={(e) => {e.preventDefault(); addNewOwner()}}  className="form">
         
             <label>First Name: </label><br />
             <input type="text" required value={firstName} onChange={(e) => {setFirstName(e.target.value)}}  /><br />
@@ -53,4 +62,4 @@ const AddNewUser = ({handelAddNewUser}) => {
   )
 }
 
-export default AddNewUser;
+export default AddNewOwner;
