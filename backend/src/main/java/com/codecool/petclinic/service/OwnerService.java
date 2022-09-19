@@ -34,7 +34,7 @@ public class OwnerService {
     }
 
 
-    public void updateOwner(OwnerDTO ownerDTO, Long ownerId) {
+    public void updateOwner(Owner ownerDTO, Long ownerId) {
         Owner ownerToUpdate = jpaOwnerRepository.getReferenceById(ownerId);
         if (!(ownerDTO.getFirstName() == "" || ownerDTO.getFirstName() == null)) {
             ownerToUpdate.setFirstName(ownerDTO.getFirstName());

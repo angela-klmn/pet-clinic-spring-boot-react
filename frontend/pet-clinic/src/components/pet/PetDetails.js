@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import myImage from '../../src/images/dog_and_cat_2.jpg'
-import UpdateUser from "./UpdateUser";
+import myImage from '../../../src/images/dog_and_cat_2.jpg'
+import UpdateUser from "../owner/UpdateUser";
 import { Link, useParams } from 'react-router-dom'
-import {apiGet} from '../dataHandler'
+import {apiGet} from '../../dataHandler'
 import Table from 'react-bootstrap/Table';
 
 

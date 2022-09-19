@@ -5,9 +5,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {useState} from "react";
-// import logo from '../../src/images/logo.jpg'
+import { Link } from 'react-router-dom'
+import AuthContext from "../context/AuthProvider";
+import { useContext } from "react";
+
 
 const NavigationBar = ({searchOwnerByName}) => {
+    const { auth } = useContext(AuthContext);
 
     const [search, setSearch] = useState('');
 
@@ -24,14 +28,19 @@ const NavigationBar = ({searchOwnerByName}) => {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/owners">Owners</Nav.Link>
-                        <Nav.Link href="/owners/add">Add Owner</Nav.Link>
-                        <NavDropdown title="Link" id="navbarScrollingDropdown">
-                            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action4">
+                        {/* ITT MUSZÁJ A REACT SAJÁT Link ELEMÉT HASZNÁLNI */}
+                        <Link to={"/"}><Nav.Link href="/">Home</Nav.Link></Link>
+                        <Link to={"/owners"}><Nav.Link href="/owners">Owners</Nav.Link></Link>
+                        <Link to={"/owners/add"}><Nav.Link href="/owners/add">Add Owner</Nav.Link></Link>
+                        <NavDropdown title="About Us" id="navbarScrollingDropdown">
+                            <Link to={"/"}><NavDropdown.Item href="/">Clinic information</NavDropdown.Item></Link>
+                            <Link to={"/"}><NavDropdown.Item href="/">Developers of the application</NavDropdown.Item></Link>
+                            <Link to={"/"}><NavDropdown.Item href="/">Contact the Developers</NavDropdown.Item></Link>
+                            <Link to={"/"}><NavDropdown.Item href="/">FAQs</NavDropdown.Item></Link>
+                            <Link to={"/"}><NavDropdown.Item href="/">FAQs</NavDropdown.Item></Link>
+                            <Link to={`/`}><NavDropdown.Item href="#action4">
                                 Another action
-                            </NavDropdown.Item>
+                            </NavDropdown.Item></Link>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="#action5">
                                 Something else here
@@ -48,6 +57,18 @@ const NavigationBar = ({searchOwnerByName}) => {
                         />
                         <Button  type="submit" variant="outline-success">Search</Button>
                     </Form>
+
+
+                    <Nav
+                        className="me-auto my-2 my-lg-0"
+                        style={{ maxHeight: '100px' }}
+                        navbarScroll
+                    >
+                    <Link to={"/"}><NavDropdown.Item href="/">You are logged in as: {auth.user}</NavDropdown.Item></Link>
+                    <Link to={"/logout"}><Button  type="submit" variant="outline-success">Log out</Button></Link>
+                    </Nav>
+
+
                 </Navbar.Collapse>
             </Container>
         </Navbar>

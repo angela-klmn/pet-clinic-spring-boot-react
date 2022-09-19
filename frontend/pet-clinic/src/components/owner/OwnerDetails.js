@@ -1,17 +1,27 @@
-import React, {useState, useEffect} from 'react'
-import myImage from '../../src/images/dog_and_cat_2.jpg'
+import React, {useState, useEffect } from 'react'
+import myImage from '../../../src/images/dog_and_cat_2.jpg'
 import UpdateUser from "./UpdateUser";
-import { Link, useParams } from 'react-router-dom'
-import {apiGet} from '../dataHandler'
-import PetCard from './PetCard';
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import {apiGet} from '../../dataHandler'
+import PetCard from '../pet/PetCard';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-const OwnerDetails = ({ handleUpdateUser, handleDelete}) => {
+const OwnerDetails = () => {
+  
     let { ownerId } = useParams();
+    const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
     console.log("owner id: " + ownerId)
 
     const [openUpdate, setOpenUpdate] = useState(false)
     const [owner, setOwner] = useState({empty: true})
     const [pets, setPets] = useState([])
+
+    const handleDelete = async (ownerId) => {
+      const response = await axiosPrivate.delete('/owners/' + ownerId);
+      navigate("/owners");
+      
+    }
 
 
     useEffect(() => {
@@ -19,15 +29,15 @@ const OwnerDetails = ({ handleUpdateUser, handleDelete}) => {
       let isMounted = true;
   
       async function fetchData() {
-        const resultOwner = await apiGet('http://localhost:8080/owners/' + ownerId);
-        const resultPets = await apiGet('http://localhost:8080/pets/owner/' + ownerId);
+        const resultOwner = await axiosPrivate.get('/owners/' + ownerId);
+        const resultPets = await axiosPrivate.get('/pets/owner/' + ownerId);
         console.log(resultOwner)
         console.log(resultPets)
   
         // 👇️ only update state if component is mounted
         if (isMounted) {
-          setOwner(resultOwner);
-          setPets(resultPets)
+          setOwner(resultOwner.data);
+          setPets(resultPets.data);
         }
       }
   
@@ -37,7 +47,7 @@ const OwnerDetails = ({ handleUpdateUser, handleDelete}) => {
         // 👇️ when component unmounts, set isMounted to false
         isMounted = false;
       };
-    }, []);
+    }, [openUpdate]);
 
 
   return (
@@ -73,7 +83,7 @@ const OwnerDetails = ({ handleUpdateUser, handleDelete}) => {
     </div>
 
         {openUpdate === true &&
-            <UpdateUser owner={owner} handelUpdateUser={handleUpdateUser} />
+            <UpdateUser owner={owner} setOpenUpdate={setOpenUpdate}/>
         }
 
     

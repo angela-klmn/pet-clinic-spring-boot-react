@@ -1,11 +1,112 @@
-import React from 'react';
+
 import image from '../../images/dog_and_cat_2.jpg';
 import './login.css';
 
-const Login = props => {
+import { useState, useRef, useEffect } from "react";
+import useAuth from '../../hooks/useAuth';
+import { Link, useNavigate, useLocation } from "react-router-dom"
+
+
+import axios from '../../api/axios';
+const LOGIN_URL = '/api/login';
+
+
+const Login = () => {
+    const { auth, setAuth, persist, setPersist } = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    const userRef = useRef();
+    const errRef = useRef();
+
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    //const [success, setSuccess] = useState(false);
+
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [user, password])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        console.log("username: " + user)
+        console.log("password: " + password)
+
+        try {
+            const response = await axios.post(LOGIN_URL,
+                new URLSearchParams({ username: user, password: password }),    // <--- itt lehet gond....
+                {
+                    headers: { 'Content-Type': "application/x-www-form-urlencoded", 'Access-Control-Allow-Credentials':true },
+                    //withCredentials: true
+                }
+            );
+            console.log("im in try block")
+            console.log(JSON.stringify(response?.data));
+            //console.log(JSON.stringify(response));
+            const accessToken = response?.data?.access_token;
+            const refreshToken = response?.data?.refresh_token;
+            const roles = response?.data?.role;
+            console.log("acc token: " + accessToken);
+            console.log("role: " + roles);
+            setAuth({ user: user, password: password, roles: roles, accessToken: accessToken, refreshToken: refreshToken });
+            setUser('');
+            setPassword('');
+            //setSuccess(true);
+            if (roles === "ROLE_CLIENT") {
+                navigate("/client/pets", { replace: true });
+            }
+            else (navigate(from, { replace: true }))
+            console.log("auth.user: " + auth.user)
+            console.log("auth.password: " + auth.password)
+            //console.log(success)
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 400) {
+                setErrMsg('Missing Username or Password');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+            } else if (err.response?.status === 403) {
+                setErrMsg('Incorrect username or password');
+            } else {
+                setErrMsg('Login Failed');
+            }
+            errRef.current.focus();
+        }
+    }
+
+    const togglePersist = () => {
+        setPersist(prev => !prev);
+    }
+
+    useEffect(() => {
+        localStorage.setItem("persist", persist);
+    }, [persist])
+
+
+
     return (
+        // <>
+        //  {success ? (
+        //         <section>
+        //             <h1>You are logged in!</h1>
+        //             <br />
+        //             <p>
+        //                 <a href="#">Go to Home</a>
+        //             </p>
+        //         </section>
+        //     ) : (
         <div className="wrapper">
             <div id="formContent">
+            <p ref={errRef} className={errMsg ? "error" : "offscreen"} aria-live="assertive">{errMsg}<br></br></p>
                 {/* <!-- Tabs Titles --> */}
                 <h2 className="title"> Client Management System </h2>
 
@@ -20,26 +121,39 @@ const Login = props => {
                 </div>
 
                 {/* <!-- Login Form --> */}
-                <form onSubmit={props.handleLogin}>
+                <form onSubmit={handleSubmit}>
                     <input
                         type="text"
-                        id="login"
+                        id="username"
+                        ref={userRef}
                         className="second username"
                         placeholder="username"
-                        onChange={props.handleUsernameChange}
-                        value={props.username}
+                        onChange={(e) => setUser(e.target.value)}
+                        value={user}
+                        required
                     />
                     <input
                         type="password"
                         id="password"
                         className="third password"
                         placeholder="password"
-                        onChange={props.handlePasswordChange}
-                        value={props.password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        required
                     />
                     <input type="submit" className="fourth customBtn" value="Login" />
-                    <input type="submit" className="fourth customBtn" value="Register" />
-                    <label style={{ color: 'red' }}>{props.message}</label>
+                    {/* <input type="submit" className="fourth customBtn" value="Register" /> */}
+                    {/* <label style={{ color: 'red' }}>What is this</label> */}
+
+                    <div className="persistCheck">
+                    <input
+                        type="checkbox"
+                        id="persist"
+                        onChange={togglePersist}
+                        checked={persist}
+                    />
+                    <label htmlFor="persist"> Trust This Device</label>
+                </div>
                 </form>
                 <div id="form-footer">
                     <p>Footer</p>
@@ -52,6 +166,8 @@ const Login = props => {
         </div> */}
             </div>
         </div>
+            // )
+    // }</>
     );
 };
 

@@ -10,9 +10,9 @@ import java.util.Set;
 
 @Entity(name="owner")
 @Table(
-        name="owner",
-        uniqueConstraints = {@UniqueConstraint(name="owner_email_unique", columnNames = "email")}
-)
+        name="owner")
+//        uniqueConstraints = {@UniqueConstraint(name="owner_email_unique", columnNames = "email")}
+//)
 public class Owner {
 
     @Id
