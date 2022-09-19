@@ -10,6 +10,7 @@ const AddNewOwner = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
 
     let newUser = {"firstName": "Tina", "lastName": "Turner", "petIds": null, "email": "tina@turner.com" }
 
@@ -17,11 +18,12 @@ const AddNewOwner = () => {
         newUser.firstName = firstName;
         newUser.lastName = lastName;
         newUser.email = email;
+        newUser.phoneNumber = phoneNumber;
+        
         handelAddNewOwner(newUser);
     }
 
     const handelAddNewOwner = async (newUser) => {
-        //apiPost("http://localhost:8080/owners/add", newUser).then(getOwners).then(navigate("/owners"))
         const response = await axiosPrivate.post('/owners/add', newUser);
         navigate("/owners");
       }
@@ -51,6 +53,9 @@ const AddNewOwner = () => {
            
             <label>E mail: </label><br />
             <input type="email" required value={email} onChange={(e) => {setEmail(e.target.value)}}/><br />
+
+            <label>Phone number: </label><br />
+            <input type="text" required value={phoneNumber} onChange={(e) => {setPhoneNumber(e.target.value)}}/><br />
         
             <br />
             

@@ -6,7 +6,7 @@ import {apiGet} from '../../dataHandler'
 import PetCard from '../pet/PetCard';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-const OwnerDetails = ({ handleUpdateUser}) => {
+const OwnerDetails = () => {
   
     let { ownerId } = useParams();
     const axiosPrivate = useAxiosPrivate();
@@ -18,8 +18,6 @@ const OwnerDetails = ({ handleUpdateUser}) => {
     const [pets, setPets] = useState([])
 
     const handleDelete = async (ownerId) => {
-      //apiDelete('http://localhost:8080/owners/' + ownerId).then(getOwners).then(navigate("/owners"));
-      
       const response = await axiosPrivate.delete('/owners/' + ownerId);
       navigate("/owners");
       
@@ -49,7 +47,7 @@ const OwnerDetails = ({ handleUpdateUser}) => {
         // 👇️ when component unmounts, set isMounted to false
         isMounted = false;
       };
-    }, []);
+    }, [openUpdate]);
 
 
   return (
@@ -85,7 +83,7 @@ const OwnerDetails = ({ handleUpdateUser}) => {
     </div>
 
         {openUpdate === true &&
-            <UpdateUser owner={owner} handelUpdateUser={handleUpdateUser} />
+            <UpdateUser owner={owner} setOpenUpdate={setOpenUpdate}/>
         }
 
     

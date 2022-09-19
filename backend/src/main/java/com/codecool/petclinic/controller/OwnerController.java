@@ -54,7 +54,7 @@ public class OwnerController {
     }
 
     @PutMapping(value = "/owners/update/{id}")
-    public void updateOwner(@RequestBody OwnerDTO ownerDTO, @PathVariable Long id) {
+    public void updateOwner(@RequestBody Owner ownerDTO, @PathVariable Long id) {
         System.out.println(ownerDTO);
         ownerService.updateOwner(ownerDTO, id);
         System.out.println("we are in updateOwner");

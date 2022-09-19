@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const ListAllOwners = ({ handleGetDetails}) => {
+const ListAllOwners = () => {
 
   const [owners, setOwners] = useState([]);
   const [deletedAClient, setDeletedAClient] = useState(false);

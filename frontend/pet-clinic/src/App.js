@@ -73,13 +73,13 @@ function App() {
     apiDelete('http://localhost:8080/pets/' + petId).then(getOwners).then(navigate(-1));
   }
 
-const handelAddNewUser = (newUser) => {
-  apiPost("http://localhost:8080/owners/add", newUser).then(getOwners).then(navigate("/owners"))
-}
+// const handelAddNewUser = (newUser) => {
+//   apiPost("http://localhost:8080/owners/add", newUser).then(getOwners).then(navigate("/owners"))
+// }
 
-  const handelUpdateUser = (newUser, ownerId) => {
-    apiPut("http://localhost:8080/owners/update/"+ ownerId, newUser)
-  }
+  // const handelUpdateUser = (newUser, ownerId) => {
+  //   apiPut("http://localhost:8080/owners/update/"+ ownerId, newUser)
+  // }
 
   const handelAddNewPet = (newPet, ownerId) => {
     apiPost("http://localhost:8080/pets/add/"+ ownerId, newPet).then(navigate(-1).then(navigate(0)))
@@ -124,9 +124,8 @@ const handelAddNewUser = (newUser) => {
                   <Route path="/" element={<Home />} />
                   <Route path="/owners">
                         <Route index element={<ListAllOwners />} />
-                        <Route path=":ownerId" element={<OwnerDetails  
-                            handleUpdateUser={handelUpdateUser} />} />
-                        <Route path="add" element={<AddNewOwner handelAddNewUser={handelAddNewUser}/> } />
+                        <Route path=":ownerId" element={<OwnerDetails  />} />
+                        <Route path="add" element={<AddNewOwner /> } />
                         <Route path="search/:name" element={<ListAllOwners owners={searchedOwner}/> } />
                   </Route>
 

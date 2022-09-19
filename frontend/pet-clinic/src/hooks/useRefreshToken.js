@@ -5,7 +5,7 @@ const useRefreshToken = () => {
     const { auth, setAuth } = useAuth();
 
     const refresh = async () => {
-        console.log("IN USE REFRESHTOKEN: "  `Bearer ${auth?.refreshToken}`)
+        console.log("IN USE REFRESHTOKEN: " + `Bearer ${auth?.refreshToken}`)
         const response = await axios.get('/api/token/refresh', {
             headers: { 'Authorization': `Bearer ${auth?.refreshToken}`,'Access-Control-Allow-Credentials':true },
             //withCredentials: true

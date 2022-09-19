@@ -5,7 +5,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {useState} from "react";
-// import logo from '../../src/images/logo.jpg'
 import { Link } from 'react-router-dom'
 import AuthContext from "../context/AuthProvider";
 import { useContext } from "react";
