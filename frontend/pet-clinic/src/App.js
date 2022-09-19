@@ -106,8 +106,15 @@ function App() {
 
   return (
     <div className='container'>
-        <Header />
-        <NavigationBar searchOwnerByName={searchOwnerByName} />
+        
+        {auth.user!=null &&
+            <Header />
+        }
+
+        {(auth.roles==ROLES.Employee) &&
+            <NavigationBar searchOwnerByName={searchOwnerByName} />
+        }
+        
 
           <Routes>
             <Route path="*" element={<NotFound />} />
@@ -148,7 +155,10 @@ function App() {
           </Routes>
  
       <hr />
-      <Footer />
+      {auth.user!=null &&
+            <Footer />
+        }
+      
       
     </div>
   );
