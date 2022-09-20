@@ -81,13 +81,13 @@ function App() {
   //   apiPut("http://localhost:8080/owners/update/"+ ownerId, newUser)
   // }
 
-  const handelAddNewPet = (newPet, ownerId) => {
-    apiPost("http://localhost:8080/pets/add/"+ ownerId, newPet).then(navigate(-1).then(navigate(0)))
-  }
+  // const handelAddNewPet = (newPet, ownerId) => {
+  //   apiPost("http://localhost:8080/pets/add/"+ ownerId, newPet).then(navigate(-1).then(navigate(0)))
+  // }
 
-  const handleAddNewVisit = (newVisit, petId) => {
-    apiPost("http://localhost:8080/visits/add/"+ petId, newVisit).then(navigate(-1))
-  }
+  // const handleAddNewVisit = (newVisit, petId) => {
+  //   apiPost("http://localhost:8080/visits/add/"+ petId, newVisit).then(navigate(-1))
+  // }
 
   const searchOwnerByName = async (name) => {
     apiGet("http://localhost:8080/owners/search/" + name).then(result => fetchSearchedOwner(result))
@@ -136,7 +136,7 @@ function App() {
                         <Route path="search/:name" element={<ListAllOwners owners={searchedOwner}/> } />
                   </Route>
 
-                  <Route path="pets/add/:ownerId" element={<AddNewPet handelAddNewPet={handelAddNewPet}/> } />
+                  <Route path="pets/add/:ownerId" element={<AddNewPet /> } />
                   <Route path="pets/:petId" element={<PetDetails handleDeleteVisit={handleDeleteVisit} handleDeletePet={handleDeletePet}/>} />
                   <Route path="visits/add/:petId" element={<AddNewVisit handleAddNewVisit={handleAddNewVisit}/>} />
 

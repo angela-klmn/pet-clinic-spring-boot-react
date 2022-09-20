@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import myImage from '../../../src/images/dog_and_cat_2.jpg'
 import UpdateUser from "../owner/UpdateUser";
-import { Link, useParams } from 'react-router-dom'
-import {apiGet} from '../../dataHandler'
 import Table from 'react-bootstrap/Table';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { Link, useParams, useNavigate } from 'react-router-dom'
 
 
 const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => {
     let {petId} = useParams();
+    const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
 
     console.log("pet id: " + petId)
     
@@ -22,16 +24,16 @@ const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => 
       let isMounted = true;
   
       async function fetchData() {
-        const resultPet = await apiGet('http://localhost:8080/pets/' + petId);
-        const resultVisits = await apiGet('http://localhost:8080/visits/pet/' + petId);
+        const resultPet = await axiosPrivate.get('/pets/' + petId);
+        const resultVisits = await axiosPrivate.get('/visits/pet/' + petId);
         console.log("pet: " + resultPet)
         console.log("pet: " + resultPet.name)
-        console.log(resultVisits)
+        console.log("VISITS RESULT: " + resultVisits)
   
         // 👇️ only update state if component is mounted
         if (isMounted) {
-          setPet(resultPet);
-          setVisits(resultVisits)
+          setPet(resultPet.data);
+          setVisits(resultVisits.data);
         }
       }
   
