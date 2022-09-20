@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
 import myImage from '../../../src/images/cat_1.jpg'
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-const AddNewPet = ({handelAddNewPet}) => {
+const AddNewPet = () => {
+
+    const navigate = useNavigate();
+    const axiosPrivate = useAxiosPrivate();
 
     const petTypes = ["DOG", "CAT", "CROCODILE", "BUNNY", "FISH"]
 
@@ -20,6 +24,11 @@ const AddNewPet = ({handelAddNewPet}) => {
         console.log("birthdate: " + birthDate)
         handelAddNewPet(newPet, ownerId);
     
+    }
+
+    const handelAddNewPet = async (newPet, ownerId) => {
+        const response = await axiosPrivate.post('/pets/add/'+ ownerId, newPet);
+        navigate(-1);
     }
 
   return (
