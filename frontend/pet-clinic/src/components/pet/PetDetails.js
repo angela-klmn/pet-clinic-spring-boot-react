@@ -7,7 +7,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import UpdatePet from "./UpdatePet"
 
 
-const PetDetails = ({ handleUpdateUser}) => {
+const PetDetails = () => {
     let {petId} = useParams();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
@@ -18,7 +18,7 @@ const PetDetails = ({ handleUpdateUser}) => {
     const [deletedAVisit, setDeletedAVisit] = useState(false)
 
 
-    const handleDeletePet = async (ownerId) => {
+    const handleDeletePet = async (petId) => {
       const response = await axiosPrivate.delete('/pets/' + petId);
       navigate(-1);
     }
@@ -77,7 +77,7 @@ const PetDetails = ({ handleUpdateUser}) => {
 
     <div>
     <button className='btn btn-outline-secondary' onClick={() => setOpenUpdate(true)}>Update Pet</button><br/><br/>
-    <button className='btn btn-outline-secondary' onClick={() => handleDeletePet(petId, pet.ownerId)}>Delete Pet</button><br/><br/>
+    <button className='btn btn-outline-secondary' onClick={() => handleDeletePet(petId)}>Delete Pet</button><br/><br/>
             <Link to={`/visits/add/${pet.id}`}><button className='btn btn-outline-secondary'>Add new visit</button></Link>
             <br/><br/>
     </div>

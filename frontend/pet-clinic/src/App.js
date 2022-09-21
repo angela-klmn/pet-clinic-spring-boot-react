@@ -20,95 +20,35 @@ import ClientPets from './components/forclients/ClientPets';
 import ClientPetDetails from './components/forclients/ClientPetDetails';
 import Users from './components/Users';
 import useAuth from './hooks/useAuth';
-import PersistLogin from './components/PersistLogin';
 import Logout from './components/Login/Logout';
 import useAxiosPrivate from "./hooks/useAxiosPrivate";
 import ListSearchedOwners from "./components/owner/ListSearchedOwners"
 
 
 function App() {
-  console.log("RELOADING????")
-  const axiosPrivate = useAxiosPrivate();
-
+  
   const ROLES = {
     'Client': "ROLE_CLIENT",
     'Employee': "ROLE_EMPLOYEE",
-
   }
+
   const { auth } = useAuth();
-
   let navigate = useNavigate();
+  const axiosPrivate = useAxiosPrivate();
 
-  const [owners, fetchOwners] = useState([])
   const [searchedOwners, fetchSearchedOwner] = useState([])
 
-  const getOwners = () => {
-    apiGet('http://localhost:8080/owners').then(result => fetchOwners(result))
-  }
-
-  // const handleDelete = (ownerId) => {
-  //   //apiDelete('http://localhost:8080/owners/' + ownerId).then(getOwners).then(navigate("/owners"));
-  //   axiosPrivate.delete('/owners/' + ownerId).then(navigate("/owners"));
-  // }
-
-//   const getOwners = async () => {
-//     try {
-//       console.log("in begining of try block")
-//         const response = await axiosPrivate.get('/owners', {
-//             //signal: controller.signal
-//         });
-//         console.log("response.data: ");
-//         console.log(response.data);
-//         isMounted && setOwners(response.data);
-//     } catch (err) {
-//         console.error(err);
-//         navigate('/login', { state: { from: location }, replace: true });
-//     }
-// }
-
-  const handleDeleteVisit = (visitId) => {
-    apiDelete('http://localhost:8080/visits/delete/' + visitId).then(navigate(0))
-  }
-
-  const handleDeletePet = (petId) => {
-    apiDelete('http://localhost:8080/pets/' + petId).then(getOwners).then(navigate(-1));
-  }
-
-// const handelAddNewUser = (newUser) => {
-//   apiPost("http://localhost:8080/owners/add", newUser).then(getOwners).then(navigate("/owners"))
-// }
-
-  // const handelUpdateUser = (newUser, ownerId) => {
-  //   apiPut("http://localhost:8080/owners/update/"+ ownerId, newUser)
-  // }
-
-  // const handelAddNewPet = (newPet, ownerId) => {
-  //   apiPost("http://localhost:8080/pets/add/"+ ownerId, newPet).then(navigate(-1).then(navigate(0)))
-  // }
-
-  // const handleAddNewVisit = (newVisit, petId) => {
-  //   apiPost("http://localhost:8080/visits/add/"+ petId, newVisit).then(navigate(-1))
-  // }
 
   const searchOwnerByName = async (name) => {
-    console.log("In searchbyname, name: " + name)
     const response = await axiosPrivate.get("/owners/search/"+name, {});
-    // debugger;
     fetchSearchedOwner(response.data);
-    console.log("In searchbyname, searchedowner : ", searchedOwners)
-    console.log("In searchbyname, response: " + response)
-    console.log(response.data)
-    //navigate("/owners/search/"+name);
-    navigate(0);
+    console.log("In searchbyname, searchedowners : ", searchedOwners)
+    navigate("/owners/search/"+name);
 }
 
 
-//console.log("In App.js outside functions: " + auth.user)
-
-
   useEffect(() => {
-    //getOwners()
-    console.log("use effect")
+    console.log("use effect in App.js")
   }, [])
 
 
@@ -123,7 +63,6 @@ function App() {
             <NavigationBar searchOwnerByName={searchOwnerByName} />
         }
         
-
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path="/login" element={<Login />} />
@@ -131,8 +70,7 @@ function App() {
             <Route path="/users" element={<Users />} />
             <Route path="/logout" element={<Logout />} />
             
-
-            <Route element={<PersistLogin />}>
+          
               {/* we want to protect these routes */}
               {/* Accessible only to EMPLOYEES */}
               <Route element={<RequireAuth allowedRoles={[ROLES.Employee]} />}>
@@ -145,7 +83,7 @@ function App() {
                   </Route>
 
                   <Route path="pets/add/:ownerId" element={<AddNewPet /> } />
-                  <Route path="pets/:petId" element={<PetDetails handleDeleteVisit={handleDeleteVisit} handleDeletePet={handleDeletePet}/>} />
+                  <Route path="pets/:petId" element={<PetDetails />} />
                   <Route path="visits/add/:petId" element={<AddNewVisit />} />
 
               </Route>
@@ -158,16 +96,14 @@ function App() {
                 <Route path="/client/pet/:petId" element={<ClientPetDetails />} />
                 
               </Route>
-            </Route> 
-        
+       
           </Routes>
  
       <hr />
       {auth.user!=null &&
             <Footer />
         }
-      
-      
+   
     </div>
   );
 }
