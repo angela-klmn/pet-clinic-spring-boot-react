@@ -35,6 +35,10 @@ public class AppStartupListener implements ApplicationListener <ContextRefreshed
         Owner owner2 = new Owner("Mariah", "Carey", "mary@cary.com", "+36 70 333 888");
         Owner owner3 = new Owner("Mick", "Jagger", "mick@jagger.org", "+381 9756 32");
         Owner owner4 = new Owner("Janet", "Jackson", "jenny@jackson.org", "+42 55 88993");
+        Owner owner5 = new Owner("John", "Travolta", "john@faceoff.com", "+42 55 88993");
+        Owner owner6 = new Owner("Barbara", "Streisand", "barby@streisand.org", "+42 55 88993");
+        Owner owner7 = new Owner("Johnny", "Cash", "johnny@folsomprison.org", "+42 55 88993");
+        Owner owner8 = new Owner("Peter", "Mahjohng", "jenny@jackson.org", "+42 55 88993");
 
         Pet pet1 = new Pet("Fluffy", LocalDate.of(2022, 8, 11), PetType.DOG );
         Pet pet2 = new Pet("Bunny", LocalDate.of(2017, 4, 3), PetType.BUNNY );
@@ -62,21 +66,29 @@ public class AppStartupListener implements ApplicationListener <ContextRefreshed
         ownerRepository.save(owner2);
         ownerRepository.save(owner3);
         ownerRepository.save(owner4);
+        ownerRepository.save(owner5);
+        ownerRepository.save(owner6);
+        ownerRepository.save(owner7);
+        ownerRepository.save(owner8);
 
-        userService.saveUser(new AppUser(null, "Angi Doktor", "angi", "aaaa", new ArrayList<>()));
-        userService.saveUser(new AppUser(null, "Kristof Doktor", "kristof", "aaaa", new ArrayList<>()));
-        userService.saveUser(new AppUser(null, "Domi Doktor", "domi", "aaaa", new ArrayList<>()));
-        userService.saveUser(new AppUser(null, "John Lennon", "john", "aaaa", new ArrayList<>()));
-        userService.saveUser(new AppUser(null, "Tina Turner", "tina", "aaaa", new ArrayList<>()));
+        userService.saveUser(new AppUser(null, "Angi Doktor", "angi@petclinic.com", "aaaa", new ArrayList<>()));
+        userService.saveUser(new AppUser(null, "Kristof Doktor", "kristof@petclinic.com", "aaaa", new ArrayList<>()));
+        userService.saveUser(new AppUser(null, "Domi Doktor", "domi@petclinic.com", "aaaa", new ArrayList<>()));
+        userService.saveUser(new AppUser(null, "John Lennon", "john@lennon.com", "aaaa", new ArrayList<>()));
+        userService.saveUser(new AppUser(null, "Mariah Carey", "mary@cary.com", "aaaa", new ArrayList<>()));
+        userService.saveUser(new AppUser(null, "Mick Jagger", "mick@jagger.org", "aaaa", new ArrayList<>()));
+        userService.saveUser(new AppUser(null, "Tina Turner", "tina@turner.org", "aaaa", new ArrayList<>()));
 
         userService.saveRole(new Role(null, "ROLE_CLIENT"));
         userService.saveRole(new Role(null, "ROLE_EMPLOYEE"));
 
-        userService.addRoleToUser("john", "ROLE_CLIENT");
-        userService.addRoleToUser("tina", "ROLE_CLIENT");
-        userService.addRoleToUser("domi", "ROLE_EMPLOYEE");
-        userService.addRoleToUser("kristof", "ROLE_EMPLOYEE");
-        userService.addRoleToUser("angi", "ROLE_EMPLOYEE");
+        userService.addRoleToUser("john@lennon.com", "ROLE_CLIENT");
+        userService.addRoleToUser("tina@turner.org", "ROLE_CLIENT");
+        userService.addRoleToUser("mick@jagger.org", "ROLE_CLIENT");
+        userService.addRoleToUser("mary@cary.com", "ROLE_CLIENT");
+        userService.addRoleToUser("domi@petclinic.com", "ROLE_EMPLOYEE");
+        userService.addRoleToUser("kristof@petclinic.com", "ROLE_EMPLOYEE");
+        userService.addRoleToUser("angi@petclinic.com", "ROLE_EMPLOYEE");
 
     }
 
