@@ -23,6 +23,7 @@ import useAuth from './hooks/useAuth';
 import PersistLogin from './components/PersistLogin';
 import Logout from './components/Login/Logout';
 import useAxiosPrivate from "./hooks/useAxiosPrivate";
+import ListSearchedOwners from "./components/owner/ListSearchedOwners"
 
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
   let navigate = useNavigate();
 
   const [owners, fetchOwners] = useState([])
-  const [searchedOwner, fetchSearchedOwner] = useState([])
+  const [searchedOwners, fetchSearchedOwner] = useState([])
 
   const getOwners = () => {
     apiGet('http://localhost:8080/owners').then(result => fetchOwners(result))
@@ -90,8 +91,15 @@ function App() {
   // }
 
   const searchOwnerByName = async (name) => {
-    apiGet("http://localhost:8080/owners/search/" + name).then(result => fetchSearchedOwner(result))
-        .then(navigate("/owners/search/"+name))
+    console.log("In searchbyname, name: " + name)
+    const response = await axiosPrivate.get("/owners/search/"+name, {});
+    // debugger;
+    fetchSearchedOwner(response.data);
+    console.log("In searchbyname, searchedowner : ", searchedOwners)
+    console.log("In searchbyname, response: " + response)
+    console.log(response.data)
+    //navigate("/owners/search/"+name);
+    navigate(0);
 }
 
 
@@ -133,12 +141,12 @@ function App() {
                         <Route index element={<ListAllOwners />} />
                         <Route path=":ownerId" element={<OwnerDetails  />} />
                         <Route path="add" element={<AddNewOwner /> } />
-                        <Route path="search/:name" element={<ListAllOwners owners={searchedOwner}/> } />
+                        <Route path="search/:name" element={<ListSearchedOwners searchedOwners={searchedOwners}/> } />
                   </Route>
 
                   <Route path="pets/add/:ownerId" element={<AddNewPet /> } />
                   <Route path="pets/:petId" element={<PetDetails handleDeleteVisit={handleDeleteVisit} handleDeletePet={handleDeletePet}/>} />
-                  <Route path="visits/add/:petId" element={<AddNewVisit handleAddNewVisit={handleAddNewVisit}/>} />
+                  <Route path="visits/add/:petId" element={<AddNewVisit />} />
 
               </Route>
 
