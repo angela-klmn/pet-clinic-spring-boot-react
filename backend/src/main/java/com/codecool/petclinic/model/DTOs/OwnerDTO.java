@@ -9,6 +9,9 @@ public class OwnerDTO {
     private String email;
     private String phoneNumber;
 
+    public OwnerDTO() {
+    }
+
     public OwnerDTO(String firstName, String lastName, String email, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;

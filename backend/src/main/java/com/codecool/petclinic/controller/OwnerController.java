@@ -23,6 +23,7 @@ public class OwnerController {
     @GetMapping("/owners")
     public List<Owner> listAllOwners() {
     List<Owner> owners =  ownerService.getAllOwners();
+        System.out.println("LIST ALL OWNERS: " + owners);
         return owners;
     }
 
@@ -35,6 +36,7 @@ public class OwnerController {
     @GetMapping("/owners/search/{name}")
     public List<Owner> getOwnerByName(@PathVariable String name) {
          List<Owner> owners = ownerService.getOwnersByName(name);
+        System.out.println("SEARCH OWNERS: " + owners);
         return owners;
     }
 
@@ -54,7 +56,7 @@ public class OwnerController {
     }
 
     @PutMapping(value = "/owners/update/{id}")
-    public void updateOwner(@RequestBody Owner ownerDTO, @PathVariable Long id) {
+    public void updateOwner(@RequestBody OwnerDTO ownerDTO, @PathVariable Long id) {
         System.out.println(ownerDTO);
         ownerService.updateOwner(ownerDTO, id);
         System.out.println("we are in updateOwner");

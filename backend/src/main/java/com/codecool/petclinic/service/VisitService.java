@@ -2,8 +2,8 @@ package com.codecool.petclinic.service;
 
 import com.codecool.petclinic.model.Pet;
 import com.codecool.petclinic.model.Visit;
-import com.codecool.petclinic.repository.JpaPetRepository;
-import com.codecool.petclinic.repository.JpaVisitRepository;
+import com.codecool.petclinic.repository.PetRepository;
+import com.codecool.petclinic.repository.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +13,11 @@ import java.util.List;
 @Service
 public class VisitService {
 
-    private final JpaVisitRepository visitRepository;
-    private final JpaPetRepository petRepository;
+    private final VisitRepository visitRepository;
+    private final PetRepository petRepository;
 
     @Autowired
-    public VisitService(JpaVisitRepository visitRepository, JpaPetRepository petRepository) {
+    public VisitService(VisitRepository visitRepository, PetRepository petRepository) {
         this.visitRepository = visitRepository;
         this.petRepository = petRepository;
     }

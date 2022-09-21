@@ -2,8 +2,8 @@ package com.codecool.petclinic.service;
 
 import com.codecool.petclinic.model.Owner;
 import com.codecool.petclinic.model.Pet;
-import com.codecool.petclinic.repository.JpaOwnerRepository;
-import com.codecool.petclinic.repository.JpaPetRepository;
+import com.codecool.petclinic.repository.OwnerRepository;
+import com.codecool.petclinic.repository.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,40 +11,40 @@ import java.util.List;
 
 @Service
 public class PetService {
-    private JpaOwnerRepository jpaOwnerRepository;
-    private JpaPetRepository jpaPetRepository;
+    private OwnerRepository ownerRepository;
+    private PetRepository petRepository;
 
 
     @Autowired
-    public PetService(JpaPetRepository jpaPetRepository, JpaOwnerRepository jpaOwnerRepository) {
-        this.jpaPetRepository = jpaPetRepository;
-        this.jpaOwnerRepository = jpaOwnerRepository;
+    public PetService(PetRepository petRepository, OwnerRepository ownerRepository) {
+        this.petRepository = petRepository;
+        this.ownerRepository = ownerRepository;
     }
 
     public List<Pet> getAllPets() {
-        List<Pet> pets = jpaPetRepository.findAll();
+        List<Pet> pets = petRepository.findAll();
         return pets;
     }
 
     public List<Pet> getPetsByOwnerId(Long ownerId) {
-        List<Pet> pets = jpaPetRepository.getPetsByOwnerId(ownerId);
+        List<Pet> pets = petRepository.getPetsByOwnerId(ownerId);
         return pets;
     }
 
     public Pet getPetById(Long petId) {
-        Pet pet = jpaPetRepository.findById(petId).get();
+        Pet pet = petRepository.findById(petId).get();
         return pet;
     }
 
     public void addPet(Pet petToAdd, Long ownerId) {
-        Owner owner = jpaOwnerRepository.getReferenceById(ownerId);
+        Owner owner = ownerRepository.getReferenceById(ownerId);
         petToAdd.setOwner(owner);
         owner.addPet(petToAdd);
-        jpaPetRepository.save(petToAdd);
+        petRepository.save(petToAdd);
     }
 
     public void updatePet(Pet petDTO, Long petId) {
-        Pet petToUpdate = jpaPetRepository.getReferenceById(petId);
+        Pet petToUpdate = petRepository.getReferenceById(petId);
         if (!(petDTO.getName() == "" || petDTO.getName() == null)) {
             petToUpdate.setName(petDTO.getName());
         }
@@ -55,10 +55,10 @@ public class PetService {
             petToUpdate.setType(petDTO.getType());
         }
 
-        jpaPetRepository.save(petToUpdate);
+        petRepository.save(petToUpdate);
     }
 
     public void deletePet(Long id) {
-        jpaPetRepository.deleteById(id);
+        petRepository.deleteById(id);
     }
 }
