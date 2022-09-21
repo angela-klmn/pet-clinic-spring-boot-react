@@ -4,23 +4,36 @@ import UpdateUser from "../owner/UpdateUser";
 import Table from 'react-bootstrap/Table';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { Link, useParams, useNavigate } from 'react-router-dom'
+import UpdatePet from "./UpdatePet"
 
 
-const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => {
+const PetDetails = ({ handleUpdateUser}) => {
     let {petId} = useParams();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
-
-    console.log("pet id: " + petId)
     
-
     const [openUpdate, setOpenUpdate] = useState(false)
     const [pet, setPet] = useState({empty: true})
     const [visits, setVisits] = useState([])
+    const [deletedAVisit, setDeletedAVisit] = useState(false)
+
+
+    const handleDeletePet = async (ownerId) => {
+      const response = await axiosPrivate.delete('/pets/' + petId);
+      navigate(-1);
+    }
+
+
+    const handleDeleteVisit = async (visitId) => {
+      const response = await axiosPrivate.delete('/visits/delete/' + visitId);
+      deletedAVisit ? setDeletedAVisit(false) : setDeletedAVisit(true);
+    
+    }
+
+    const getAge = birthDate => Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e+10)
 
 
     useEffect(() => {
-      // 👇️ set isMounted to true
       let isMounted = true;
   
       async function fetchData() {
@@ -30,7 +43,6 @@ const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => 
         console.log("pet: " + resultPet.name)
         console.log("VISITS RESULT: " + resultVisits)
   
-        // 👇️ only update state if component is mounted
         if (isMounted) {
           setPet(resultPet.data);
           setVisits(resultVisits.data);
@@ -40,10 +52,9 @@ const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => 
       fetchData();
   
       return () => {
-        // 👇️ when component unmounts, set isMounted to false
         isMounted = false;
       };
-    }, []);
+    }, [deletedAVisit, openUpdate]);
 
 
   return (
@@ -59,7 +70,8 @@ const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => 
         <p>Pet Id: {pet.id} </p>
         <p>Name: <strong>{pet.name} </strong></p>
         <p>Birth date: {pet.birthDate} </p>
-        <p>Age:  </p>
+        <p>Pet type: {pet.type} </p>
+        <p>Age:   {getAge(pet.birthDate)} </p>
             
     </div>
 
@@ -77,7 +89,7 @@ const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => 
     </div>
 
         {openUpdate === true &&
-            <UpdateUser owner={pet} handelUpdateUser={handleUpdateUser} />
+            <UpdatePet pet={pet} setOpenUpdate={setOpenUpdate} />
         }
 
     
@@ -107,7 +119,7 @@ const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => 
               <td>{visit.description}</td>
               <td>{visit.treatmentType}</td>
               <td>{visit.price}</td>
-              <td><button className="btn btn-outline-secondary" onClick={() => handleDeleteVisit(visit.id, petId)}>Delete</button>  </td>
+              <td><button className="btn btn-outline-secondary" onClick={() => handleDeleteVisit(visit.id)}>Delete</button>  </td>
             </tr>
           )
         })}
