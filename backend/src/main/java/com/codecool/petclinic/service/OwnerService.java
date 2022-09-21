@@ -63,4 +63,9 @@ public class OwnerService {
         List<Owner> owners = ownerRepository.findOwnerByFirstOrLastName(name);
         return owners;
     }
+
+    public Owner getOwnerByEmail(String email) {
+        Owner owner = ownerRepository.findOwnerByEmail(email);
+        return owner;
+    }
 }
