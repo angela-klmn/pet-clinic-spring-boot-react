@@ -1,47 +1,60 @@
 import React, {useState, useEffect} from 'react'
 import myImage from '../../../src/images/dog_and_cat_2.jpg'
 import UpdateUser from "../owner/UpdateUser";
-import { Link, useParams } from 'react-router-dom'
-import {apiGet} from '../../dataHandler'
 import Table from 'react-bootstrap/Table';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import UpdatePet from "./UpdatePet"
 
 
-const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => {
+const PetDetails = () => {
     let {petId} = useParams();
-
-    console.log("pet id: " + petId)
+    const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
     
-
     const [openUpdate, setOpenUpdate] = useState(false)
     const [pet, setPet] = useState({empty: true})
     const [visits, setVisits] = useState([])
+    const [deletedAVisit, setDeletedAVisit] = useState(false)
+
+
+    const handleDeletePet = async (petId) => {
+      const response = await axiosPrivate.delete('/pets/' + petId);
+      navigate(-1);
+    }
+
+
+    const handleDeleteVisit = async (visitId) => {
+      const response = await axiosPrivate.delete('/visits/delete/' + visitId);
+      deletedAVisit ? setDeletedAVisit(false) : setDeletedAVisit(true);
+    
+    }
+
+    const getAge = birthDate => Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e+10)
 
 
     useEffect(() => {
-      // 👇️ set isMounted to true
       let isMounted = true;
   
       async function fetchData() {
-        const resultPet = await apiGet('http://localhost:8080/pets/' + petId);
-        const resultVisits = await apiGet('http://localhost:8080/visits/pet/' + petId);
+        const resultPet = await axiosPrivate.get('/pets/' + petId);
+        const resultVisits = await axiosPrivate.get('/visits/pet/' + petId);
         console.log("pet: " + resultPet)
         console.log("pet: " + resultPet.name)
-        console.log(resultVisits)
+        console.log("VISITS RESULT: " + resultVisits)
   
-        // 👇️ only update state if component is mounted
         if (isMounted) {
-          setPet(resultPet);
-          setVisits(resultVisits)
+          setPet(resultPet.data);
+          setVisits(resultVisits.data);
         }
       }
   
       fetchData();
   
       return () => {
-        // 👇️ when component unmounts, set isMounted to false
         isMounted = false;
       };
-    }, []);
+    }, [deletedAVisit, openUpdate]);
 
 
   return (
@@ -57,13 +70,14 @@ const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => 
         <p>Pet Id: {pet.id} </p>
         <p>Name: <strong>{pet.name} </strong></p>
         <p>Birth date: {pet.birthDate} </p>
-        <p>Age:  </p>
+        <p>Pet type: {pet.type} </p>
+        <p>Age:   {getAge(pet.birthDate)} </p>
             
     </div>
 
     <div>
     <button className='btn btn-outline-secondary' onClick={() => setOpenUpdate(true)}>Update Pet</button><br/><br/>
-    <button className='btn btn-outline-secondary' onClick={() => handleDeletePet(petId, pet.ownerId)}>Delete Pet</button><br/><br/>
+    <button className='btn btn-outline-secondary' onClick={() => handleDeletePet(petId)}>Delete Pet</button><br/><br/>
             <Link to={`/visits/add/${pet.id}`}><button className='btn btn-outline-secondary'>Add new visit</button></Link>
             <br/><br/>
     </div>
@@ -75,7 +89,7 @@ const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => 
     </div>
 
         {openUpdate === true &&
-            <UpdateUser owner={pet} handelUpdateUser={handleUpdateUser} />
+            <UpdatePet pet={pet} setOpenUpdate={setOpenUpdate} />
         }
 
     
@@ -105,7 +119,7 @@ const PetDetails = ({ handleUpdateUser, handleDeleteVisit, handleDeletePet}) => 
               <td>{visit.description}</td>
               <td>{visit.treatmentType}</td>
               <td>{visit.price}</td>
-              <td><button className="btn btn-outline-secondary" onClick={() => handleDeleteVisit(visit.id, petId)}>Delete</button>  </td>
+              <td><button className="btn btn-outline-secondary" onClick={() => handleDeleteVisit(visit.id)}>Delete</button>  </td>
             </tr>
           )
         })}
