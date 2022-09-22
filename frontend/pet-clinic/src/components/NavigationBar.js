@@ -19,6 +19,8 @@ const NavigationBar = ({searchOwnerByName}) => {
 
     const [search, setSearch] = useState('');
 
+    
+
     return (
 
         <Navbar bg="light" expand="lg" sticky="top">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import myImage from '../../../src/images/cat_1.jpg'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const AddNewOwner = () => {
