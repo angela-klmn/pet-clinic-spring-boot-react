@@ -4,7 +4,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import AuthContext from "../context/AuthProvider";
 import { useContext } from "react";
 import {Image} from "react-bootstrap";
-import profile from '../images/cat_1.jpg';
+import profile from '../images/profile.jpg';
 
 
 function ProfilePic() {
