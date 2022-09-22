@@ -5,6 +5,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import {apiGet} from '../../dataHandler'
 import PetCard from '../pet/PetCard';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import "../../css/card.css";
 
 const OwnerDetails = () => {
   
@@ -91,23 +92,20 @@ const OwnerDetails = () => {
     </div>
     <hr></hr>
 
-    <div>
+    <div className='flexcontainer'>
     <h1>Pets of client:</h1><br/>
 
-
-        <div className='flexcontainer'>
         {pets.map(pet => {
         return (
-          <div key={pet.id}>
-            <PetCard pet={pet} />
-          </div>
+            <ul className="cards">
+              <div key={pet.id}>
+                <PetCard pet={pet} />
+              </div>
+            </ul>
         );
       })}
-        </div>
 
     </div>
-
-
     </div>
   )
 }

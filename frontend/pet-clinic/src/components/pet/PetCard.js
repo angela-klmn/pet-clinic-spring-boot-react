@@ -1,22 +1,30 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link, useParams } from 'react-router-dom'
+import "../../css/card.css"
 
 
 function PetCard({pet}) {
   return (
+    <li>
     <Link to={`/pets/${pet.id}`}>
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title>Name: {pet.name}</Card.Title>
-        <Card.Text>
-          Birth date: {pet.birthDate}
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
+      <a href="" className="card" style={{height: 300, width: 300}}>
+        <img src="https://community.envri-fair.eu/wp-content/uploads/2016/08/software-developer-copy-1024x1024.jpg" className="card__image" alt=""/>
+        <div className="card__overlay">
+          <div className="card__header">
+            <svg className="card__arc" xmlns="http://www.w3.org/2000/svg">
+              <path/>
+            </svg>
+            {/*<img className="card__thumb" src="https://i.imgur.com/7D7I6dI.png" alt=""/>*/}
+            <div className="card__header-text">
+              <h3 className="card__title">Name: {pet.name}</h3>
+            </div>
+          </div>
+          <p className="card__description">Birth date: {pet.birthDate}</p>
+        </div>
+      </a>
     </Link>
+    </li>
   );
 }
 

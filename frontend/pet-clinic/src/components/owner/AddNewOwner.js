@@ -31,35 +31,30 @@ const AddNewOwner = () => {
 
   return (
     <div className='flexcontainer'>
-        <div>
-        <br />
-       
-    <img src={myImage} width={350} alt="doctor animals"/>
-    </div>
+    {/*    <div>*/}
+    {/*    <br />*/}
+    {/*   */}
+    {/*<img src={myImage} width={350} alt="doctor animals"/>*/}
+    {/*</div>*/}
 
     <div>
         
         <br/>
-        <h1>Add new Client: </h1><br/>
+        <h1 className={"add-label"}>Add new client</h1>
         <br/>
 
-        <form onSubmit={(e) => {e.preventDefault(); addNewOwner()}}  className="form">
-        
-            <label>First Name: </label><br />
-            <input type="text" required value={firstName} onChange={(e) => {setFirstName(e.target.value)}}  /><br />
-             
-            <label>Last Name: </label><br />
-            <input type="text" required value={lastName} onChange={(e) => {setLastName(e.target.value)}}/><br />
-           
-            <label>E mail: </label><br />
-            <input type="email" required value={email} onChange={(e) => {setEmail(e.target.value)}}/><br />
+        <form onSubmit={(e) => {e.preventDefault(); addNewOwner()}}>
 
-            <label>Phone number: </label><br />
-            <input type="text" required value={phoneNumber} onChange={(e) => {setPhoneNumber(e.target.value)}}/><br />
+            <input class="textbox" type="text" placeholder="Firstname" required value={firstName} onChange={(e) => {setFirstName(e.target.value)}}  /><br /><br/>
+
+            <input class="textbox" type="text" placeholder="Lastname" required value={lastName} onChange={(e) => {setLastName(e.target.value)}}/><br /><br/>
+
+            <input class="textbox" type="email" placeholder="E-mail" required value={email} onChange={(e) => {setEmail(e.target.value)}}/><br /><br/>
+
+            <input class="textbox" type="text" placeholder="Phone number" required value={phoneNumber} onChange={(e) => {setPhoneNumber(e.target.value)}}/><br /><br/>
         
             <br />
-            
-            <input type="submit" value="Add New User" />
+            <input type="submit" value="Add New Client" class="button"/>
         </form>
         </div>
         
