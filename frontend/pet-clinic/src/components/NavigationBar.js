@@ -25,18 +25,22 @@ const NavigationBar = ({searchOwnerByName}) => {
 
         <Navbar bg="light" expand="lg" sticky="top">
             <Container fluid>
-                <Link to={"/"}><Image roundedCircle src="https://media.istockphoto.com/vectors/pet-logo-design-template-pet-house-pet-clinic-pet-care-or-other-pet-vector-id1139195687?k=20&m=1139195687&s=170667a&w=0&h=rFD6rAg7K2kti0kQWMifhsC52q06RyMuD9MDg5ywB8M=" width={80} /></Link>
+            <Link to={"/"}><Image roundedCircle src="https://ae01.alicdn.com/kf/HTB1Zds4KpXXXXbWXXXXq6xXFXXXN/11-4-10-2CM-Pet-Cat-Dog-Paw-Print-Window-Decal-Lovely-Car-Styling-Decoration-Stickers.jpg" width={80} /></Link>
+            <Link to={"/"}><Navbar.Brand href="/">Pet Clinic</Navbar.Brand></Link>
+                
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
                         className="me-auto my-2 my-lg-0"
                         style={{ maxHeight: '100px', width: "100%" }}
                         navbarScroll
+                        variant="dark"
                     >
                         {/* ITT MUSZÁJ A REACT SAJÁT Link ELEMÉT HASZNÁLNI */}
                         <Link to={"/"}><Nav.Link href="/">Home</Nav.Link></Link>
-                        <Link to={"/owners"}><Nav.Link href="/owners">Owners</Nav.Link></Link>
-                        <Link to={"/owners/add"}><Nav.Link href="/owners/add">Add Owner</Nav.Link></Link>
+                        <Link to={"/owners"}><Nav.Link href="/owners">All Clients</Nav.Link></Link>
+                        <Link to={"/owners/add"}><Nav.Link href="/owners/add">Add New Client</Nav.Link></Link>
+                        <Link to={"/owners/search"}><Nav.Link href="/owners/search">Search Clients</Nav.Link></Link>
                         <NavDropdown title="About Us" id="navbarScrollingDropdown">
                             <Link to={"/"}><NavDropdown.Item href="/">Clinic information</NavDropdown.Item></Link>
                             <NavDropdown.Divider />
@@ -52,12 +56,14 @@ const NavigationBar = ({searchOwnerByName}) => {
                                 Another action
                             </NavDropdown.Item></Link>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action5">
-                                Something else here
+                            <NavDropdown.Item >
+                            <a href="https://google.com" target="_blank" rel="noreferrer">
+          Looking for something else?
+        </a>
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Form onSubmit={(e) => {e.preventDefault(); searchOwnerByName(search)}} className="d-flex">
+                    {/* <Form onSubmit={(e) => {e.preventDefault(); searchOwnerByName(search)}} className="d-flex">
                         <Form.Control
                             onChange={(e) => setSearch(e.target.value)}
                             type="search"
@@ -66,7 +72,7 @@ const NavigationBar = ({searchOwnerByName}) => {
                             aria-label="Search"
                         />
                         <Button type="submit" variant="outline-success">Search</Button>
-                    </Form>
+                    </Form> */}
 
 
                     <Nav

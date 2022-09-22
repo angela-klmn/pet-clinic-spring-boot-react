@@ -40,6 +40,13 @@ public class OwnerController {
         return owners;
     }
 
+    @GetMapping("/owners/username/{email}")
+    public Owner getOwnerByUsername(@PathVariable String email) {
+        Owner owner = ownerService.getOwnerByEmail(email);
+        System.out.println("SEARCH OWNERS BY EMAIL: " + owner);
+        return owner;
+    }
+
 
     @DeleteMapping("/owners/{id}")
     public void deleteOwner(@PathVariable Long id) {
