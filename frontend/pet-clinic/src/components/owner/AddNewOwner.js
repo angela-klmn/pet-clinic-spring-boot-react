@@ -40,7 +40,7 @@ const AddNewOwner = () => {
     <div>
         
         <br/>
-        <h1>Add new User: </h1><br/>
+        <h1>Add new Client: </h1><br/>
         <br/>
 
         <form onSubmit={(e) => {e.preventDefault(); addNewOwner()}}  className="form">
