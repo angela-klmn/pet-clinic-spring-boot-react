@@ -9,7 +9,7 @@ function PetCard({pet}) {
     <li>
     <Link to={`/pets/${pet.id}`}>
       <a href="" className="card" style={{height: 300, width: 300}}>
-        <img src="https://community.envri-fair.eu/wp-content/uploads/2016/08/software-developer-copy-1024x1024.jpg" className="card__image" alt=""/>
+        <img src="https://kb.rspca.org.au/wp-content/uploads/2021/07/collie-beach-bokeh.jpg" className="card__image" alt=""/>
         <div className="card__overlay">
           <div className="card__header">
             <svg className="card__arc" xmlns="http://www.w3.org/2000/svg">

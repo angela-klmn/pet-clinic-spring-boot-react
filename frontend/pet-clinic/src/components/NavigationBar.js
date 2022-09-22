@@ -25,7 +25,7 @@ const NavigationBar = ({searchOwnerByName}) => {
 
         <Navbar bg="light" expand="lg" sticky="top">
             <Container fluid>
-                <Link to={"/"}><Image roundedCircle src="https://media.istockphoto.com/vectors/pet-logo-design-template-pet-house-pet-clinic-pet-care-or-other-pet-vector-id1139195687?k=20&m=1139195687&s=170667a&w=0&h=rFD6rAg7K2kti0kQWMifhsC52q06RyMuD9MDg5ywB8M=" width={80} /></Link>
+                <Link to={"/"}><Image roundedCircle src="https://i.pinimg.com/originals/09/0a/1b/090a1b4779b5b4c51ca6c7f85c838c2b.png" width={80} /></Link>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -75,7 +75,7 @@ const NavigationBar = ({searchOwnerByName}) => {
                         navbarScroll
                     >
                         <Link to={"/"}><ProfilePic /></Link>
-                    <Link to={"/logout"}><Button type="submit" variant="secondary">Log out</Button></Link>
+                    <Link to={"/logout"}><Button style={{width:100}} type="submit" variant="secondary">Log out</Button></Link>
                     </Nav>
 
 

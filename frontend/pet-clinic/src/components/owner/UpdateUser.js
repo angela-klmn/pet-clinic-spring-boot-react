@@ -31,24 +31,20 @@ const UpdateUser = ({owner, setOpenUpdate}) => {
     <div>
         
         <br/>
-        <h1>Update Owner: </h1><br/>
+        <h1 className={"add-label"}>Update Owner: </h1><br/>
 
         <form onSubmit={(e) =>{e.preventDefault(); updateOwner()}} className="form">
-        
-            <label>First Name: </label><br />
-            <input type="text" value={firstName} placeholder={owner.firstName} onChange={(e) => {setFirstName(e.target.value)}}  /><br />
-             
-            <label>Last Name: </label><br />
-            <input type="text" value={lastName} placeholder={owner.lastName} onChange={(e) => {setLastName(e.target.value)}}/><br />
-           
-            <label>E-mail: </label><br />
-            <input type="email" value={email} placeholder={owner.email} onChange={(e) => {setEmail(e.target.value)}}/><br />
 
-            <label>Phone number: </label><br />
-            <input type="text" value={phoneNumber} placeholder={owner.phoneNumber} onChange={(e) => {setPhoneNumber(e.target.value)}}/><br />
+            <input class="textbox" type="text" placeholder="Firstname" value={firstName} placeholder={owner.firstName} onChange={(e) => {setFirstName(e.target.value)}}  /><br/><br/>
+
+            <input class="textbox" type="text" placeholder="Lastname" value={lastName} placeholder={owner.lastName} onChange={(e) => {setLastName(e.target.value)}}/><br /><br/>
+
+            <input class="textbox" placeholder="E-mail" type="email" value={email} placeholder={owner.email} onChange={(e) => {setEmail(e.target.value)}}/><br /><br/>
+
+            <input class="textbox" type="text" placeholder="Phone number" value={phoneNumber} placeholder={owner.phoneNumber} onChange={(e) => {setPhoneNumber(e.target.value)}}/><br /><br/>
         
             <br />
-            <input type="submit" value="Update" />
+            <input type="submit" value="Update" className="button" />
         </form>
         </div>
         
