@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ListAllOwners from './components/owner/ListAllOwners'
-import Header from './components/Header'
+import Header from './components/header/Header'
 import {apiGet, apiDelete, apiPost, apiPut} from './dataHandler'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OwnerDetails from './components/owner/OwnerDetails';
@@ -22,7 +22,9 @@ import Users from './components/Users';
 import useAuth from './hooks/useAuth';
 import Logout from './components/Login/Logout';
 import useAxiosPrivate from "./hooks/useAxiosPrivate";
+import DeveloperInfo from "./components/developerInfo/DeveloperInfo";
 import ListSearchedOwners from "./components/owner/ListSearchedOwners"
+
 
 
 function App() {
@@ -94,6 +96,7 @@ function App() {
               <Route element={<RequireAuth allowedRoles={[ROLES.Employee, ROLES.Client]} />}>
                 <Route path="/client/pets" element={<ClientPets />} />
                 <Route path="/client/pet/:petId" element={<ClientPetDetails />} />
+                <Route path="/developers" element={<DeveloperInfo />} />
                 
               </Route>
        
