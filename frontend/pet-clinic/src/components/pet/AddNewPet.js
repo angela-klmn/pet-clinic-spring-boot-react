@@ -33,31 +33,23 @@ const AddNewPet = () => {
 
   return (
     <div className='flexcontainer'>
-        <div>
-        <br />
-       
-    <img src={myImage} width={350} alt="doctor animals"/>
-    </div>
+
 
     <div>
         
         <br/>
-        <h1>Add new Pet: </h1><br/>
+        <h1 className={"add-label"}>Add new pet</h1><br/>
 
         <form onSubmit={(e) => {e.preventDefault(); addNewPet()}} className="form">
-        
-            <label>Name: </label><br />
-            <input type="text" required value={name} onChange={(e) => {setName(e.target.value)}}  /><br />
-             
-            {/* <label>Pet type: </label><br />
-            <input type="text" required value={petType} onChange={(e) => {setPetType(e.target.value)}}/><br /> */}
-           
-            <label>Birth date: </label><br />
-            <input type="date" required value={birthDate} onChange={(e) => {setBirthDate(e.target.value)}}/><br />
 
-            <label for="type">Choose a pet type:</label><br />
-                <select id="type" name="type" required onChange={(e) => {setPetType(e.target.value)}}>
-                <option key="1" value="" disabled selected>Select your option</option>
+
+            <input class="textbox" placeholder="Name" type="text" required value={name} onChange={(e) => {setName(e.target.value)}}  /><br/><br/>
+
+            <input class="textbox" placeholder="Birth date" type="date" required value={birthDate} onChange={(e) => {setBirthDate(e.target.value)}}/><br/><br/>
+
+
+                <select class="textbox" id="type" name="type" required onChange={(e) => {setPetType(e.target.value)}}>
+                <option key="1" value="" disabled selected>Choose pet type</option>
                 {petTypes.map(petType =>
                     <option key={petType} value={petType}>{petType}</option>
                     )};
@@ -65,7 +57,7 @@ const AddNewPet = () => {
         
             <br /><br />
             
-            <input type="submit" value="Add New Pet" />
+            <input type="submit" value="Add New Pet" class="button" />
         </form>
         </div>
         
