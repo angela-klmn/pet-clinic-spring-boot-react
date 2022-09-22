@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+
 import AuthContext from "../../context/AuthProvider";
 import { useContext } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
@@ -62,9 +57,35 @@ const ClientPets = () => {
 
         <br />
         <br/>
+
+        {(pets.length==0) &&
+        <div>
+            <h2>Currently I don't have any pets in the system.</h2>
+            </div> }
+            
+        {(pets.length!=0) &&
+            <div>
+            <br/>
+  
+  
+                <div className='flexcontainer'>
+                {pets.map(pet => {
+                return (
+                  <div key={pet.id}>
+                    <PetCardForClients pet={pet} />
+                  </div>
+                );
+              })}
+                </div>
+  
+            </div>
+        }
+
+<br/>
+<hr></hr>
+<br/>
     
-        <h1>The clicik has the the following information about me: </h1><br/>
-        <p>Owner Id: {owner.id} </p>
+        <h3>The clinick has the the following information about me: </h3><br/>
         <p>First name: <strong>{owner.firstName} </strong></p>
         <p>Last name: {owner.lastName} </p>
         <p>E-mail address: {owner.email} </p>
@@ -82,21 +103,7 @@ const ClientPets = () => {
     </div>
     <hr></hr>
 
-    <div>
-    <h1>Here are my pets:</h1><br/>
-
-
-        <div className='flexcontainer'>
-        {pets.map(pet => {
-        return (
-          <div key={pet.id}>
-            <PetCardForClients pet={pet} />
-          </div>
-        );
-      })}
-        </div>
-
-    </div>
+         
     </div>
     </div>
 
