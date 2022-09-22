@@ -35,8 +35,9 @@ const NavigationBar = ({searchOwnerByName}) => {
                     >
                         {/* ITT MUSZÁJ A REACT SAJÁT Link ELEMÉT HASZNÁLNI */}
                         <Link to={"/"}><Nav.Link href="/">Home</Nav.Link></Link>
-                        <Link to={"/owners"}><Nav.Link href="/owners">Owners</Nav.Link></Link>
-                        <Link to={"/owners/add"}><Nav.Link href="/owners/add">Add Owner</Nav.Link></Link>
+                        <Link to={"/owners"}><Nav.Link href="/owners">All Clients</Nav.Link></Link>
+                        <Link to={"/owners/add"}><Nav.Link href="/owners/add">Add New Client</Nav.Link></Link>
+                        <Link to={"/owners/search"}><Nav.Link href="/owners/search">Search Clients</Nav.Link></Link>
                         <NavDropdown title="About Us" id="navbarScrollingDropdown">
                             <Link to={"/"}><NavDropdown.Item href="/">Clinic information</NavDropdown.Item></Link>
                             <NavDropdown.Divider />
@@ -52,12 +53,14 @@ const NavigationBar = ({searchOwnerByName}) => {
                                 Another action
                             </NavDropdown.Item></Link>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action5">
-                                Something else here
+                            <NavDropdown.Item >
+                            <a href="https://google.com" target="_blank" rel="noreferrer">
+          Looking for something else?
+        </a>
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Form onSubmit={(e) => {e.preventDefault(); searchOwnerByName(search)}} className="d-flex">
+                    {/* <Form onSubmit={(e) => {e.preventDefault(); searchOwnerByName(search)}} className="d-flex">
                         <Form.Control
                             onChange={(e) => setSearch(e.target.value)}
                             type="search"
@@ -66,7 +69,7 @@ const NavigationBar = ({searchOwnerByName}) => {
                             aria-label="Search"
                         />
                         <Button type="submit" variant="outline-success">Search</Button>
-                    </Form>
+                    </Form> */}
 
 
                     <Nav

@@ -25,6 +25,7 @@ import useAxiosPrivate from "./hooks/useAxiosPrivate";
 import DeveloperInfo from "./components/developerInfo/DeveloperInfo";
 import ListSearchedOwners from "./components/owner/ListSearchedOwners"
 import SearchOwners from './components/owner/SearchOwners';
+import NavBarForClients from './components/forclients/NavBarForClients';
 
 
 
@@ -58,13 +59,17 @@ function App() {
   return (
     <div className='container'>
         
-        {auth.user!=null &&
+        {/* {auth.user!=null &&
             <Header />
-        }
+        } */}
 
         {(auth.roles==ROLES.Employee) &&
             <NavigationBar searchOwnerByName={searchOwnerByName} />
         }
+
+      {(auth.roles==ROLES.Client) &&
+                  <NavBarForClients />
+              }
         
           <Routes>
             <Route path="*" element={<NotFound />} />
