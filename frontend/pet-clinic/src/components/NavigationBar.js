@@ -8,6 +8,10 @@ import {useState} from "react";
 import { Link } from 'react-router-dom'
 import AuthContext from "../context/AuthProvider";
 import { useContext } from "react";
+import ProfilePic from "./ProfilePic";
+import "../css/navbar.css";
+import {Image} from "react-bootstrap";
+
 
 
 const NavigationBar = ({searchOwnerByName}) => {
@@ -19,13 +23,12 @@ const NavigationBar = ({searchOwnerByName}) => {
 
         <Navbar bg="light" expand="lg" sticky="top">
             <Container fluid>
-                {/* <Image roundedCircle src={logo} width={80} /> */}
-                <Navbar.Brand href="#">  Pet Clinic</Navbar.Brand>
+                <Link to={"/"}><Image roundedCircle src="https://media.istockphoto.com/vectors/pet-logo-design-template-pet-house-pet-clinic-pet-care-or-other-pet-vector-id1139195687?k=20&m=1139195687&s=170667a&w=0&h=rFD6rAg7K2kti0kQWMifhsC52q06RyMuD9MDg5ywB8M=" width={80} /></Link>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
                         className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
+                        style={{ maxHeight: '100px', width: "100%" }}
                         navbarScroll
                     >
                         {/* ITT MUSZÁJ A REACT SAJÁT Link ELEMÉT HASZNÁLNI */}
@@ -34,10 +37,15 @@ const NavigationBar = ({searchOwnerByName}) => {
                         <Link to={"/owners/add"}><Nav.Link href="/owners/add">Add Owner</Nav.Link></Link>
                         <NavDropdown title="About Us" id="navbarScrollingDropdown">
                             <Link to={"/"}><NavDropdown.Item href="/">Clinic information</NavDropdown.Item></Link>
-                            <Link to={"/"}><NavDropdown.Item href="/">Developers of the application</NavDropdown.Item></Link>
+                            <NavDropdown.Divider />
+                            <Link to={"/developers"}><NavDropdown.Item href="/">Developers of the application</NavDropdown.Item></Link>
+                            <NavDropdown.Divider />
                             <Link to={"/"}><NavDropdown.Item href="/">Contact the Developers</NavDropdown.Item></Link>
+                            <NavDropdown.Divider />
                             <Link to={"/"}><NavDropdown.Item href="/">FAQs</NavDropdown.Item></Link>
+                            <NavDropdown.Divider />
                             <Link to={"/"}><NavDropdown.Item href="/">FAQs</NavDropdown.Item></Link>
+                            <NavDropdown.Divider />
                             <Link to={`/`}><NavDropdown.Item href="#action4">
                                 Another action
                             </NavDropdown.Item></Link>
@@ -55,7 +63,7 @@ const NavigationBar = ({searchOwnerByName}) => {
                             className="me-2"
                             aria-label="Search"
                         />
-                        <Button  type="submit" variant="outline-success">Search</Button>
+                        <Button type="submit" variant="outline-success">Search</Button>
                     </Form>
 
 
@@ -64,8 +72,8 @@ const NavigationBar = ({searchOwnerByName}) => {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                    <Link to={"/"}><NavDropdown.Item href="/">You are logged in as: {auth.user}</NavDropdown.Item></Link>
-                    <Link to={"/logout"}><Button  type="submit" variant="outline-success">Log out</Button></Link>
+                        <Link to={"/"}><ProfilePic /></Link>
+                    <Link to={"/logout"}><Button type="submit" variant="secondary">Log out</Button></Link>
                     </Nav>
 
 
