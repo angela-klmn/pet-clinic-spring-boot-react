@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface JpaOwnerRepository extends JpaRepository<Owner, Long> {
+public interface OwnerRepository extends JpaRepository<Owner, Long> {
 
     @Query(value= "select * from owner o where upper(o.first_name) = upper(?1) or upper(o.last_name) = upper(?1)",
             nativeQuery = true)
