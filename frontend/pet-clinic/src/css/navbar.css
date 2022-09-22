@@ -1,3 +1,5 @@
 a {
     text-decoration: none;
 }
+
+a:hover { COLOR: blue; TEXT-DECORATION: none; font-weight: none }
