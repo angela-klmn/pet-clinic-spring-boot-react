@@ -25,9 +25,11 @@ const NavigationBar = ({searchOwnerByName}) => {
 
         <Navbar bg="light" expand="lg" sticky="top">
             <Container fluid>
-            <Link to={"/"}><Image roundedCircle src="https://ae01.alicdn.com/kf/HTB1Zds4KpXXXXbWXXXXq6xXFXXXN/11-4-10-2CM-Pet-Cat-Dog-Paw-Print-Window-Decal-Lovely-Car-Styling-Decoration-Stickers.jpg" width={80} /></Link>
+
+                <Link to={"/"}><Image roundedCircle src="https://i.pinimg.com/originals/09/0a/1b/090a1b4779b5b4c51ca6c7f85c838c2b.png" width={80} /></Link>
+            
             <Link to={"/"}><Navbar.Brand href="/">Pet Clinic</Navbar.Brand></Link>
-                
+
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -81,7 +83,7 @@ const NavigationBar = ({searchOwnerByName}) => {
                         navbarScroll
                     >
                         <Link to={"/"}><ProfilePic /></Link>
-                    <Link to={"/logout"}><Button type="submit" variant="secondary">Log out</Button></Link>
+                    <Link to={"/logout"}><Button style={{width:100}} type="submit" variant="secondary">Log out</Button></Link>
                     </Nav>
 
 
