@@ -47,7 +47,7 @@ const Home = () => {
               </Link>
           </li>
           <li>
-              <Link to={"/owners"}>
+              <Link to={"/owners/search"}>
                   <a href="" className="card">
                       <img src="https://img.freepik.com/premium-vector/search-bar-icon-flat-vector-illustration_435184-854.jpg?w=2000" className="card__image" alt=""/>
                       <div className="card__overlay">

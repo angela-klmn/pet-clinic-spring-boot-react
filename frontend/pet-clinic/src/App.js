@@ -24,6 +24,7 @@ import Logout from './components/Login/Logout';
 import useAxiosPrivate from "./hooks/useAxiosPrivate";
 import DeveloperInfo from "./components/developerInfo/DeveloperInfo";
 import ListSearchedOwners from "./components/owner/ListSearchedOwners"
+import SearchOwners from './components/owner/SearchOwners';
 
 
 
@@ -81,6 +82,7 @@ function App() {
                         <Route index element={<ListAllOwners />} />
                         <Route path=":ownerId" element={<OwnerDetails  />} />
                         <Route path="add" element={<AddNewOwner /> } />
+                        <Route path="search" element={<SearchOwners searchOwnerByName={searchOwnerByName} /> } />
                         <Route path="search/:name" element={<ListSearchedOwners searchedOwners={searchedOwners}/> } />
                   </Route>
 
