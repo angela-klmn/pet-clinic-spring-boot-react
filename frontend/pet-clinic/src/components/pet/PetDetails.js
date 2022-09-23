@@ -59,46 +59,55 @@ const PetDetails = () => {
 
   return (
     <div>
-    <div className='flexcontainer'>
-    
-        <div>
 
-        <br />
-        <br/>
-    
-        <h1>Pet Profile: </h1><br/>
-        <p>Pet Id: {pet.id} </p>
-        <p>Name: <strong>{pet.name} </strong></p>
-        <p>Birth date: {pet.birthDate} </p>
-        <p>Pet type: {pet.type} </p>
-        <p>Age:   {getAge(pet.birthDate)} </p>
-            
-    </div>
+        <div className='flexcontainer profile-container'>
 
-    <div>
-    <button className='btn btn-outline-secondary' onClick={() => setOpenUpdate(true)}>Update Pet</button><br/><br/>
-    <button className='btn btn-outline-secondary' onClick={() => handleDeletePet(petId)}>Delete Pet</button><br/><br/>
-            <Link to={`/visits/add/${pet.id}`}><button className='btn btn-outline-secondary'>Add new visit</button></Link>
-            <br/><br/>
-    </div>
+            <div className="card profile-card">
+                <div className="container profile-container">
+                    <img className={"profile-img"}
+                         src="https://kb.rspca.org.au/wp-content/uploads/2021/07/collie-beach-bokeh.jpg"
+                         alt="profile-img"></img>
+                    <h2 className={"profile-h2"}>{pet.name}</h2>
+                    <small>Pet id: {pet.id}</small><br/>
+                    <small>{pet.birthDate}</small><br/>
+                    <small>{pet.type}</small><br/>
+                    <small>Age: {getAge(pet.birthDate)}</small><br/>
+                    <div className="bar">
+                        <button className='btn' onClick={() => setOpenUpdate(true)}>
+                            <i className="far fa-smile"></i>
+                            <span>Update details</span>
+                        </button>
+                        <button className="btn btn-outline-secondary" onClick={() => handleDeletePet(petId)}>
+                            <i className="far fa-smile"></i>
+                            <span>Delete pet</span>
+                        </button>
+                        <Link to={`/visits/add/${pet.id}`}>
+                            <button className='btn btn-outline-secondary'>
+                                <i className="far fa-smile"></i>
+                                <span>Add new visit</span>
+                            </button>
+                        </Link>
+                        <br/><br/>
+                    </div>
+                </div>
+            </div>
 
-    <div>
-        <br />
-       
-    <img src={myImage} width={350} alt="doctor animals"/>
-    </div>
+            <div>
+                <br />
 
-        {openUpdate === true &&
-            <UpdatePet pet={pet} setOpenUpdate={setOpenUpdate} />
-        }
+            </div>
 
-    
-    
-    </div>
+            {openUpdate === true &&
+                <UpdatePet pet={pet} setOpenUpdate={setOpenUpdate} />
+            }
+
+
+        </div>
+
     <hr></hr>
 
     <div>
-    <h1>Visits of the pet:</h1><br/>
+    <h1 className="add-label">Visits of the pet:</h1><br/>
 
 
 <Table striped bordered hover>

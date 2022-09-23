@@ -32,30 +32,26 @@ const UpdateUser = ({pet, setOpenUpdate}) => {
     <div>
         
         <br/>
-        <h1>Update Owner: </h1><br/>
+        <h1 className={"add-label"}>Update Pet </h1><br/>
 
         <form onSubmit={(e) =>{e.preventDefault(); updatePet()}} className="form">
-        
-            <label>Pet's Name: </label><br />
-            <input type="text" value={petName} placeholder={pet.name} onChange={(e) => {setPetName(e.target.value)}}  /><br />
-             
-            <label>Birth Date </label><br />
-            <input type="date" value={birthDate} placeholder={pet.birthDate} onChange={(e) => {setBirthDate(e.target.value)}}/><br />
+
+            <input class="textbox" type="text" placeholder="Pet's Name"  value={petName} placeholder={pet.name} onChange={(e) => {setPetName(e.target.value)}}  /><br /><br />
+
+            <input class="textbox" type="date" value={birthDate} placeholder={pet.birthDate} onChange={(e) => {setBirthDate(e.target.value)}}/><br /><br />
            
             {/* <label>E-mail: </label><br />
             <input type="email" value={petType} placeholder={pet.type} onChange={(e) => {setPetType(e.target.value)}}/><br /> */}
 
-
-            <label for="type">Choose a pet type:</label><br />
-                <select id="type" name="type" placeholder={pet.type} onChange={(e) => {setPetType(e.target.value)}}>
-                <option key="1" value="" disabled selected>Select your option</option>
+                <select class="textbox" id="type" name="type" placeholder={pet.type} onChange={(e) => {setPetType(e.target.value)}}>
+                <option key="1" value="" disabled selected>Select pet type</option>
                 {petTypes.map(petType =>
                     <option key={petType} value={petType}>{petType}</option>
                     )};
-                </select>
+                </select><br />
         
             <br />
-            <input type="submit" value="Update" />
+            <input type="submit" value="Update" className="button"/>
         </form>
         </div>
         

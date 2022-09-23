@@ -7,6 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  margin:    0 auto;
+  max-width: 1000px;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -34,7 +40,7 @@ body {
   -webkit-background-size: 100%;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: 91.5%;
+  background-size: 69.4%;
   font-family: 'Roboto', Tahoma, Arial, sans-serif;
   line-height: 1.5;
   font-size: 13px;

@@ -125,9 +125,9 @@ const Login = () => {
 
                  
                 </form>
-                <div id="form-footer">
-                    <p>Footer</p>
-                </div>
+                {/*<div id="form-footer">*/}
+                {/*    <p>Footer</p>*/}
+                {/*</div>*/}
                 {/* <!-- Remind Passowrd --> */}
                 {/* <div id="formFooter">
           <a className="underlineHover forgot-pswd" href="#">

@@ -37,27 +37,24 @@ const AddNewVisit = () => {
             <div>
 
                 <br/>
-                <h1>Add new Visit: </h1><br/>
+                <h1 className={"add-label"}>Add new Visit: </h1><br/>
 
                 <form onSubmit={(e) =>{e.preventDefault(); addNewVisit()}} className="form">
 
-                    <label for="type">Choose a treatment type:</label><br/>
-                    <select id="type" name="type" required onChange={(e) => {
+                    <select class="textbox" id="type" name="type" required onChange={(e) => {
                         setVisitType(e.target.value)}}>
-                        <option key="1" value="" disabled selected>Select your option</option>
+                        <option key="1" value="" disabled selected>Select visit type</option>
                         {treatmentType.map(visitType =>
                             <option key={visitType} value={visitType}>{visitType}</option>)};
-                    </select>
+                    </select><br />
                     <br/>
 
-                    <label>Description: </label><br />
-                    <input type="text" required value={description} onChange={(e) => {setDescription(e.target.value)}}  /><br />
+                    <input class="textbox" type="text" placeholder="Description" required value={description} onChange={(e) => {setDescription(e.target.value)}}  /><br /><br />
 
-                    <label>Price: </label><br />
-                    <input type="text" required value={price} onChange={(e) => {setPrice(e.target.value)}}  /><br />
-                    <br /><br />
+                    <input class="textbox" type="text" placeholder="Price"  required value={price} onChange={(e) => {setPrice(e.target.value)}}  /><br /><br />
 
-                    <input type="submit" value="Add New Visit" />
+
+                    <input type="submit" value="Add New Visit" className="button" />
                 </form>
             </div>
 
